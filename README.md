@@ -2,10 +2,10 @@
 
 > **AI Native Development** toolkit for Microsoft Dynamics 365 Business Central implementing the **[AI-Native Instructions Architecture](https://danielmeppiel.github.io/awesome-ai-native/)** framework with **37 specialized Agent Primitives** across **3 systematic layers**. Features **AL Orchestra** multi-agent TDD system that transforms feature requests into code following BC best practices.
 
-> **v2.8.0** - Workflow Simplification: Direct workflow (User → al-architect → al-conductor)
+> **v2.11.0** - Agent Clarity & Collaboration: Enhanced descriptions, streamlined tools, improved handoffs
 
 [![Validation Status](https://img.shields.io/badge/validation-passing-brightgreen)](./validate-al-collection.js)
-[![Version](https://img.shields.io/badge/version-2.8.0-blue)](./CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-2.11.0-blue)](./CHANGELOG.md)
 [![Tools](https://img.shields.io/badge/tools-37-orange)](./al-development.md)
 [![Framework](https://img.shields.io/badge/framework-AI--Native--Instructions-purple)](https://danielmeppiel.github.io/awesome-ai-native/)
 [![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
@@ -643,6 +643,13 @@ AL-Development-Collection-for-GitHub-Copilot/
 
 ## 🏷️ Version History
 
+### 2.11.0 (2026-02-06) - Agent Clarity & Collaboration Enhancement
+- 📝 **Enhanced Agent Descriptions** - Clearer, standardized descriptions across all agents
+- 🔧 **Tool List Optimization** - Eliminated redundancies and improved tool boundaries
+- 🤝 **Improved Handoff Tags** - Better collaboration flows between agents
+- 🎯 **Prompt Alignment** - Workflows synchronized with new tools and capabilities
+- ✅ **Impact**: Easier agent selection, smoother transitions, consistent experience
+
 ### 2.8.0 (2025-11-14) - Workflow Simplification
 - 🎯 **Simplified Workflow** - Reduced from 3-4 steps to 2 steps
   - Removed al-orchestrator routing layer (archived)
@@ -809,11 +816,11 @@ MIT License - see [LICENSE](./LICENSE) file for details.
 
 **Status**: ✅ AI Native-Instructions Architecture Compliant
 **Framework**: [AI Native-Instructions Architecture](https://danielmeppiel.github.io/awesome-ai-native/)
-**Last Updated**: 2025-11-14
+**Last Updated**: 2026-02-06
 **Collection ID**: `al-development`
-**Version**: 2.8.0
+**Version**: 2.11.0
 **Total Primitives**: 37 (9 instructions + 18 workflows + 6 agents + 4 orchestra)
 **Installation**: npm CLI (recommended) | Clone & Install
 **Context Standard**: AGENTS.md ready
-**Latest**: Workflow Simplification - Direct User → al-architect → al-conductor path
+**Latest**: Agent Clarity & Collaboration - Enhanced descriptions, streamlined tools, improved handoffs
 

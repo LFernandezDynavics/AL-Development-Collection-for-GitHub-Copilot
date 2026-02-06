@@ -7,6 +7,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.11.0] - 2026-02-06
+
+### Changed
+- 📝 **Agent Descriptions Clarity** - Improved and standardized agent descriptions
+  - Renamed and enhanced descriptions for better understanding of each agent's purpose
+  - Clearer differentiation between strategic and tactical agents
+  - Improved role definitions for specialized agents (API, Copilot, Debugger, Tester)
+  - Enhanced Orchestra subagent descriptions for better workflow comprehension
+- 🔧 **Tool List Optimization** - Eliminated redundancies across agents
+  - Reviewed and streamlined tool assignments to prevent overlap
+  - Removed duplicate tool references in agent definitions
+  - Optimized tool boundaries for clearer separation of concerns
+  - Enhanced MCP tool integration documentation
+- 🤝 **Collaboration Flow Enhancement** - Improved handoff tags and inter-agent workflows
+  - Updated handoff labels for clearer agent-to-agent transitions
+  - Enhanced collaboration patterns between strategic and tactical agents
+  - Improved delegation flows (e.g., architect → conductor → subagents)
+  - Better integration between specialist agents and Orchestra system
+- 🎯 **Prompt Alignment** - Synchronized prompts with new tools and functionalities
+  - Updated workflow prompts to reference current tool sets
+  - Aligned agentic workflows with enhanced agent capabilities
+  - Improved consistency between prompts and agent tool boundaries
+  - Enhanced documentation references in workflow files
+
+### Impact
+- ✅ **Clearer Navigation** - Users can more easily choose the right agent for their task
+- ✅ **Reduced Confusion** - Eliminated tool overlap and redundancy
+- ✅ **Better Collaboration** - Smoother handoffs between agents
+- ✅ **Consistent Experience** - Prompts and agents now perfectly aligned
+- 📊 **Total Primitives** - 37 tools unchanged (9 instructions + 18 workflows + 6 agents + 4 orchestra)
+
 ## [2.10.0] - 2025-11-27
 
 ### Fixed
@@ -381,7 +412,8 @@ This project follows [Semantic Versioning](https://semver.org/):
 - [Issues](https://github.com/javiarmesto/AL-Development-Collection-for-GitHub-Copilot/issues)
 - [Discussions](https://github.com/javiarmesto/AL-Development-Collection-for-GitHub-Copilot/discussions)
 
-[Unreleased]: https://github.com/javiarmesto/AL-Development-Collection-for-GitHub-Copilot/compare/v2.10.0...HEAD
+[Unreleased]: https://github.com/javiarmesto/AL-Development-Collection-for-GitHub-Copilot/compare/v2.11.0...HEAD
+[2.11.0]: https://github.com/javiarmesto/AL-Development-Collection-for-GitHub-Copilot/compare/v2.10.0...v2.11.0
 [2.10.0]: https://github.com/javiarmesto/AL-Development-Collection-for-GitHub-Copilot/compare/v2.9.0...v2.10.0
 [2.9.0]: https://github.com/javiarmesto/AL-Development-Collection-for-GitHub-Copilot/compare/v2.8.0...v2.9.0
 [2.8.0]: https://github.com/javiarmesto/AL-Development-Collection-for-GitHub-Copilot/compare/v2.7.0...v2.8.0

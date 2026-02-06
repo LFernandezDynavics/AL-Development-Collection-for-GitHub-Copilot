@@ -3,14 +3,14 @@
 # GitHub Copilot Instructions for AL Development
 
 ## Overview
-This workspace contains AL (Application Language) code for Microsoft Dynamics 365 Business Central. This is an **AI Native AL Development** toolkit implementing the **[AI Native-Instructions Architecture](https://danielmeppiel.github.io/awesome-ai-native/)** framework. GitHub Copilot is configured with **37 Agent Primitives** across **3 framework layers** to assist with AL development following Microsoft's best practices and this project's specific standards.
+This workspace contains AL (Application Language) code for Microsoft Dynamics 365 Business Central. This is an **AI Native AL Development** toolkit implementing the **[AI Native-Instructions Architecture](https://danielmeppiel.github.io/awesome-ai-native/)** framework. GitHub Copilot is configured with **38 Agent Primitives** across **3 framework layers** to assist with AL development following Microsoft's best practices and this project's specific standards.
 
 ### Framework Architecture
 This collection implements the **AI Native-Instructions Architecture** with three systematic layers:
 
 **Layer 1: Markdown Prompt Engineering** - Structured instructions using semantic markdown (headers, lists, links) that guide AI reasoning for predictable, repeatable results.
 
-**Layer 2: Agent Primitives** - 37 configurable tools (9 instructions + 18 workflows + 6 agents + 4 orchestra) that deploy your prompt engineering systematically.
+**Layer 2: Agent Primitives** - 38 configurable tools (9 instructions + 18 workflows + 7 agents + 4 orchestra) that deploy your prompt engineering systematically.
 
 **Layer 3: Context Engineering** - Strategic management of LLM context windows through modular loading, `applyTo` patterns, and optimized information retrieval.
 
@@ -18,7 +18,7 @@ This collection implements the **AI Native-Instructions Architecture** with thre
 
 ## 🎯 Complete Toolset Available
 
-This workspace provides **37 Agent Primitives** organized across **3 framework layers** of Copilot assistance leveraging the AI Native-Instructions Architecture:
+This workspace provides **38 Agent Primitives** organized across **3 framework layers** of Copilot assistance leveraging the AI Native-Instructions Architecture:
 
 ### Layer 1: Auto-Applied Instructions (Always Active)
 Located in `instructions/` - These **Agent Primitives** apply automatically based on file type via `applyTo` patterns:
@@ -66,6 +66,7 @@ Located in `agents/` - **Role-based specialists** with MCP tool boundaries:
 - **al-tester** - Testing strategy & TDD
 - **al-api** - API development
 - **al-copilot** - AI/Copilot feature development
+- **al-presales** - Project planning, cost estimation & feasibility analysis
 
 **Tactical Specialist:**
 - **al-developer** - Tactical implementation with full build tools
@@ -139,7 +140,7 @@ Located in `agents/` - **Role-based specialists** with MCP tool boundaries:
 ```
 Use al-architect mode          # Design solutions
 Use al-debugger mode          # Investigate issues
-Use al-orchestrator mode      # Route to right tool
+Use al-presales mode          # Project planning & cost estimation
 ```
 
 ## 💻 Code Generation Examples
@@ -269,7 +270,7 @@ Practical examples of what to ask Copilot:
 ### Scenario 1: "I'm starting a new AL project"
 
 ```markdown
-Step 1: Use al-orchestrator (if unsure) OR go directly to:
+Step 1: Use al-architect (if unsure) OR go directly to:
 Step 2: @workspace use al-initialize
   → Guides through complete environment & workspace initialization
   → Downloads symbols
@@ -610,7 +611,7 @@ Always review Copilot suggestions:
 4. Reduce workspace size if very large
 
 ### Wrong Mode or Prompt Selected
-- Use **al-orchestrator** to get routed correctly
+- Use **al-architect** to get design guidance
 - Be explicit: "Use al-architect mode for this"
 - Reference prompts explicitly: "@workspace use al-debug"
 
@@ -803,6 +804,7 @@ Question or Task?
 - "Use al-tester" - Testing strategy
 - "Use al-api" - API development
 - "Use al-copilot" - AI features
+- "Use al-presales" - Project planning & cost estimation
 
 ### Prompts (Tactical)
 - `@workspace use al-initialize` - Setup project & environment
@@ -928,13 +930,13 @@ This workspace configuration evolves based on usage. If you find:
 - Missing functionality → Suggest new prompts or modes
 - Conflicting guidance → Report for clarification
 
-Remember: **You have 37 Agent Primitives working together to make AL development easier, faster, and better!**
+Remember: **You have 38 Agent Primitives working together to make AL development easier, faster, and better!**
 
 ---
 
 **Framework**: [AI Native-Instructions Architecture](https://danielmeppiel.github.io/awesome-ai-native/)  
-**Version**: 2.8.0  
-**Last Updated**: 2025-11-25  
+**Version**: 2.11.0  
+**Last Updated**: 2026-02-06  
 **Workspace**: AL Development for Business Central  
-**Total Primitives**: 37 (9 instructions + 18 workflows + 6 agents + 4 orchestra)  
+**Total Primitives**: 38 (9 instructions + 18 workflows + 7 agents + 4 orchestra)  
 **Status**: ✅ Fully compliant with AI Native-Instructions Architecture

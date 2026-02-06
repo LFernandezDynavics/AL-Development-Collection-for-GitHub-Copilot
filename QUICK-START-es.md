@@ -23,7 +23,7 @@ npx al-collection install
 
 ### Opción 3: Manual
 ```bash
-git clone https://github.com/javiarmesto/AL_Copilot_Collection.git
+git clone https://github.com/javiarmesto/ALDC-AL-Development-Collection-for-GitHub-Copilot.git
 cd AL_Copilot_Collection
 node install.js install [tu-directorio-al]
 ```
@@ -106,20 +106,20 @@ Paso 5: @workspace use al-build → Despliegue
 ## 💡 ¿Qué Complejidad Tengo?
 
 ### 🟢 Simple (Directamente con Copilot)
-- ✅ Cambio en 1-2 objetos
-- ✅ Validación de campo
-- ✅ Extensión de página
-- ✅ Campo calculado
+- ✅ Alcance limitado — cambio aislado
+- ✅ Validación de campo o extensión de página
+- ✅ Una sola fase de implementación
+- ✅ Sin integraciones necesarias
 
 ### 🟡 Moderada (al-architect + al-conductor)
-- ✅ 3-6 objetos relacionados
-- ✅ Lógica de negocio con flujos
+- ✅ Alcance moderado — múltiples áreas relacionadas
+- ✅ Lógica de negocio con flujos internos
 - ✅ Eventos de integración interna
 - ✅ 2-3 fases de implementación
 
 ### 🔴 Compleja (al-architect + especialistas + al-conductor)
-- ✅ 7+ objetos
-- ✅ APIs externas
+- ✅ Alcance extenso — impacto arquitectónico amplio
+- ✅ APIs o servicios externos
 - ✅ OAuth/autenticación
 - ✅ 4+ fases de implementación
 
@@ -147,6 +147,7 @@ Use al-conductor mode     # Implementación TDD
 Use al-api mode          # APIs REST/OData
 Use al-debugger mode     # Diagnóstico profundo
 Use al-tester mode       # Estrategia de testing
+Use al-presales mode     # Planificación y estimación de proyectos
 ```
 
 ---
@@ -518,9 +519,9 @@ Use al-debugger mode
 
 ---
 
-**Versión**: 2.7.0  
+**Versión**: 2.11.0  
 **Framework**: [AI Native-Instructions Architecture](https://danielmeppiel.github.io/awesome-ai-native/)  
-**Última Actualización**: 2025-11-14
+**Última Actualización**: 2026-02-06
 
 ---
 

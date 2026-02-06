@@ -3,12 +3,12 @@ title: "AL Development Collection"
 linkTitle: "AL Development Collection"
 weight: 1
 description: >
-  AI Native AL Development toolkit with 37 Agent Primitives for systematic Business Central development
+  AI Native AL Development toolkit with 38 Agent Primitives for systematic Business Central development
 ---
 
 ## Overview
 
-The AL Development Collection provides a complete AI-native development toolkit for Microsoft Dynamics 365 Business Central. Instead of ad-hoc AI usage, you get systematic engineering through 37 Agent Primitives organized across 3 framework layers implementing the AI Native-Instructions Architecture.
+The AL Development Collection provides a complete AI-native development toolkit for Microsoft Dynamics 365 Business Central. Instead of ad-hoc AI usage, you get systematic engineering through 38 Agent Primitives organized across 3 framework layers implementing the AI Native-Instructions Architecture.
 
 **Created by**: [Javier Armesto](https://github.com/javiarmesto)
 
@@ -16,9 +16,10 @@ The AL Development Collection provides a complete AI-native development toolkit 
 
 ## Key Features
 
-**6 Role-Based Specialist Agents**:
+**7 Role-Based Specialist Agents**:
 - al-architect 🏗️ (solution design), al-developer 💻 (implementation), al-debugger 🐛 (troubleshooting)
 - al-tester ✅ (TDD/quality), al-api 🌐 (API development), al-copilot 🤖 (AI features)
+- al-presales 💼 (project planning & cost estimation)
 
 **4 Orchestra System Agents** (Multi-agent TDD):
 - al-conductor 🎭 (orchestration), al-planning-subagent 🔍 (research)

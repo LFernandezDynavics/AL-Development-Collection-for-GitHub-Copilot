@@ -36,7 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ✅ **Reduced Confusion** - Eliminated tool overlap and redundancy
 - ✅ **Better Collaboration** - Smoother handoffs between agents
 - ✅ **Consistent Experience** - Prompts and agents now perfectly aligned
-- 📊 **Total Primitives** - 37 tools unchanged (9 instructions + 18 workflows + 6 agents + 4 orchestra)
+- 📊 **Total Primitives** - 38 tools (9 instructions + 18 workflows + 7 agents + 4 orchestra)
 
 ## [2.10.0] - 2025-11-27
 

@@ -386,7 +386,7 @@ Switch to al-architect mode
 
 **For Understanding the Collection:**
 ```
-Switch to al-orchestrator mode
+Switch to al-architect mode
 ```
 
 ## Security Considerations

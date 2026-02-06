@@ -239,7 +239,7 @@ Before submitting a pull request:
 
 4. **Update the collection manifest**:
    - Add your file to `collections/al-development.collection.yml`
-   - Use correct `kind`: `instruction`, `prompt`, or `chat-mode`
+   - Use correct `kind`: `instruction`, `prompt`, or `agent`
    - For agents, add `usage` guidance
 
 Example manifest entry:

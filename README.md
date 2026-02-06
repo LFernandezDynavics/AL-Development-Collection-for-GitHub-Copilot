@@ -1,12 +1,12 @@
 # AL Development Collection for GitHub Copilot
 
-> **AI Native Development** toolkit for Microsoft Dynamics 365 Business Central implementing the **[AI-Native Instructions Architecture](https://danielmeppiel.github.io/awesome-ai-native/)** framework with **37 specialized Agent Primitives** across **3 systematic layers**. Features **AL Orchestra** multi-agent TDD system that transforms feature requests into code following BC best practices.
+> **AI Native Development** toolkit for Microsoft Dynamics 365 Business Central implementing the **[AI-Native Instructions Architecture](https://danielmeppiel.github.io/awesome-ai-native/)** framework with **38 specialized Agent Primitives** across **3 systematic layers**. Features **AL Orchestra** multi-agent TDD system that transforms feature requests into code following BC best practices.
 
 > **v2.11.0** - Agent Clarity & Collaboration: Enhanced descriptions, streamlined tools, improved handoffs
 
 [![Validation Status](https://img.shields.io/badge/validation-passing-brightgreen)](./validate-al-collection.js)
 [![Version](https://img.shields.io/badge/version-2.11.0-blue)](./CHANGELOG.md)
-[![Tools](https://img.shields.io/badge/tools-37-orange)](./al-development.md)
+[![Tools](https://img.shields.io/badge/tools-38-orange)](./al-development.md)
 [![Framework](https://img.shields.io/badge/framework-AI--Native--Instructions-purple)](https://danielmeppiel.github.io/awesome-ai-native/)
 [![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 [![GitHub Issues](https://img.shields.io/github/issues/javiarmesto/AL-Development-Collection-for-GitHub-Copilot)](https://github.com/javiarmesto/AL-Development-Collection-for-GitHub-Copilot/issues)
@@ -145,7 +145,7 @@ graph TB
 | **Agents** | 7 files | `Use [mode-name]` | Role-based strategic/tactical specialists |
 | **Orchestra System** | 4 files | `Use al-conductor` | Multi-agent TDD orchestration |
 | **Agentic Workflows** | 18 files | `@workspace use [name]` | Complete task execution processes |
-| **Total Primitives** | **37 tools** | — | Complete AI Native toolkit with TDD |
+| **Total Primitives** | **38 tools** | — | Complete AI Native toolkit with TDD |
 
 ## 📦 What's Included: Agent Primitives
 
@@ -210,6 +210,7 @@ graph TB
 - **al-tester** ✅ - Testing strategy, TDD methodology
 - **al-api** 🌐 - RESTful API design & implementation
 - **al-copilot** 🤖 - AI-powered Copilot features development
+- **al-presales** 💼 - Project planning, cost estimation & feasibility analysis
 
 **Tactical Specialist** (implement & execute):
 - **al-developer** 💻 - Code implementation with full build tool access
@@ -322,7 +323,7 @@ This comprehensive guide includes:
 
 ### 📖 Integration Guide (1 primitive)
 
-- **copilot-instructions.md** - Master document coordinating all 37 primitives with usage guidance
+- **copilot-instructions.md** - Master document coordinating all 38 primitives with usage guidance
 
 ## 🎯 Common Workflows
 
@@ -556,7 +557,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines.
 
 ## 📋 File Structure
 
-**AI Native-Instructions Architecture** with **37 Agent Primitives** across **3 layers**:
+**AI Native-Instructions Architecture** with **38 Agent Primitives** across **3 layers**:
 
 ```
 AL-Development-Collection-for-GitHub-Copilot/
@@ -594,7 +595,7 @@ AL-Development-Collection-for-GitHub-Copilot/
 │   ├── al-copilot-promptdialog.prompt.md        # PromptDialog creation
 │   ├── al-copilot-test.prompt.md                # AI Test Toolkit integration
 │   └── al-copilot-generate.prompt.md            # Natural language to code
-├── agents/                                       # 💬 Layer 2: Agents (6 + 4 files)
+├── agents/                                       # 💬 Layer 2: Agents (7 + 4 files)
 │   ├── index.md                                 # Complete agent guide
 │   ├── al-architect.agent.md                    # 🏗️ Solution architecture (START HERE)
 │   ├── al-developer.agent.md                    # 💻 Tactical implementation
@@ -602,13 +603,11 @@ AL-Development-Collection-for-GitHub-Copilot/
 │   ├── al-tester.agent.md                       # ✅ Testing strategy
 │   ├── al-api.agent.md                          # 🌐 API development
 │   ├── al-copilot.agent.md                      # 🤖 AI features
-│   └── orchestration/                           # 🎭 Orchestra System (4 files)
-│       ├── README.md                            # Complete Orchestra docs (23k chars)
-│       ├── index.md                             # Quick reference
-│       ├── al-conductor.agent.md                # Main orchestration agent
-│       ├── al-planning-subagent.agent.md        # AL-aware research
-│       ├── al-implement-subagent.agent.md       # TDD implementation (Haiku 4.5)
-│       └── al-review-subagent.agent.md          # Quality validation
+│   ├── al-presales.agent.md                     # 💼 Project planning & estimation
+│   ├── al-conductor.agent.md                    # 🎭 Orchestra: Main orchestration
+│   ├── al-planning-subagent.agent.md            # 🔍 Orchestra: AL-aware research
+│   ├── al-implement-subagent.agent.md           # ⚙️ Orchestra: TDD implementation
+│   └── al-review-subagent.agent.md              # ✅ Orchestra: Quality validation
 ├── docs/                                         # Documentation mirrors
 │   ├── agents/                                  # Agent documentation
 │   ├── instructions/                            # Instructions documentation
@@ -616,7 +615,7 @@ AL-Development-Collection-for-GitHub-Copilot/
 │   └── workflows/
 │       └── complete-development-flow.md         # Visual workflow guide
 ├── collections/                                  # Collection manifests
-│   └── al-development.collection.yml            # Main collection (37 primitives)
+│   └── al-development.collection.yml            # Main collection (38 primitives)
 ├── references/                                   # Framework documentation
 │   ├── AI Native-INSTRUCTIONS-ARCHITECTURE.md   # Framework compliance
 │   ├── ai native-concepts.md                    # Core concepts
@@ -636,7 +635,7 @@ AL-Development-Collection-for-GitHub-Copilot/
 ├── REPRODUCIBLE-EXAMPLE.md                      # Step-by-step reproducible example
 └── README.md                                    # This file
 
-# Total: 37 Agent Primitives (9 instructions + 18 workflows + 6 agents + 4 orchestra)
+# Total: 38 Agent Primitives (9 instructions + 18 workflows + 7 agents + 4 orchestra)
 # AGENTS.md compilation ready (Layer 3: Context Engineering)
 # All primitives use applyTo patterns for modular context loading
 ```
@@ -808,8 +807,8 @@ MIT License - see [LICENSE](./LICENSE) file for details.
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/javiarmesto/al-development-collection/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/javiarmesto/al-development-collection/discussions)
+- **Issues**: [GitHub Issues](https://github.com/javiarmesto/ALDC-AL-Development-Collection-for-GitHub-Copilot/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/javiarmesto/ALDC-AL-Development-Collection-for-GitHub-Copilot/discussions)
 - **Documentation**: [al-development.md](./al-development.md)
 
 ---
@@ -819,7 +818,7 @@ MIT License - see [LICENSE](./LICENSE) file for details.
 **Last Updated**: 2026-02-06
 **Collection ID**: `al-development`
 **Version**: 2.11.0
-**Total Primitives**: 37 (9 instructions + 18 workflows + 6 agents + 4 orchestra)
+**Total Primitives**: 38 (9 instructions + 18 workflows + 7 agents + 4 orchestra)
 **Installation**: npm CLI (recommended) | Clone & Install
 **Context Standard**: AGENTS.md ready
 **Latest**: Agent Clarity & Collaboration - Enhanced descriptions, streamlined tools, improved handoffs

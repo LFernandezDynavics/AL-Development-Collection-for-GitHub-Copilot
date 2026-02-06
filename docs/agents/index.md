@@ -50,7 +50,7 @@ I need to build a sales forecasting system...
 
 **Customization Tip**: You can adjust these complexity definitions by editing this file in your repository. For example, if your team typically works with smaller changes, you might redefine MEDIUM as "1-2 phases" instead of "2-3 phases". The framework adapts to your workflow.
 
-### 📦 Available Agents (10 total)
+### 📦 Available Agents (11 total)
 
 ### 🏗️ Implementation Agents (Complexity-Driven)
 
@@ -78,6 +78,7 @@ I need to build a sales forecasting system...
 | **al-tester** | Testing Strategy & TDD Expert | Any complexity | Test design, TDD strategy, coverage planning |
 | **al-api** | RESTful API Design Specialist | 🟡 MEDIUM / 🔴 HIGH | API contracts, endpoint design, external integrations |
 | **al-copilot** | AI-Powered Features Expert | 🟡 MEDIUM / 🔴 HIGH | Copilot experiences, prompt engineering, Azure OpenAI integration |
+| **al-presales** | Pre-Sales & Project Estimation | Any complexity | Project planning, cost estimation, feasibility analysis, SWOT |
 
 ## 🏗️ Tool Boundaries (MCP Model)
 
@@ -421,6 +422,6 @@ Run `npm run validate` to verify:
 
 **Version**: 2.8.0
 **Total Agents**: 10 (6 strategic + 4 orchestra subagents)
-**Last Updated**: 2025-11-25
+**Last Updated**: 2026-02-06
 
 **Usage Philosophy**: Agents are **strategic consultants**, not **code executors**. They analyze, design, and recommend. For execution, they delegate to **Agentic Workflows**.

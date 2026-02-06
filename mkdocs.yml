@@ -68,9 +68,9 @@ extra:
     provider: mike
     default: latest
   
-  analytics:
-    provider: google
-    property: G-XXXXXXXXXX  # Replace with your GA4 ID
+  #analytics:
+  #  provider: google
+  #  property: G-XXXXXXXXXX  # Replace with your GA4 ID
 
 extra_css:
   - stylesheets/extra.css
@@ -174,20 +174,18 @@ nav:
   - Agents:
     - Overview: agents/index.md
     - Core Agents:
-      - Orchestrator: agents/al-orchestrator.agent.md
       - Architect: agents/al-architect.agent.md
       - Developer: agents/al-developer.agent.md
       - Debugger: agents/al-debugger.agent.md
       - Tester: agents/al-tester.agent.md
       - API Specialist: agents/al-api.agent.md
       - Copilot Specialist: agents/al-copilot.agent.md
+      - Pre-Sales Specialist: agents/al-presales.agent.md
     - Orchestra System:
-      - Overview: agents/orchestration/index.md
-      - Complete Guide: agents/orchestration/README.md
-      - Conductor: agents/orchestration/al-conductor.agent.md
-      - Planning Subagent: agents/orchestration/al-planning-subagent.agent.md
-      - Implement Subagent: agents/orchestration/al-implement-subagent.agent.md
-      - Review Subagent: agents/orchestration/al-review-subagent.agent.md
+      - Conductor: agents/al-conductor.agent.md
+      - Planning Subagent: agents/al-planning-subagent.agent.md
+      - Implement Subagent: agents/al-implement-subagent.agent.md
+      - Review Subagent: agents/al-review-subagent.agent.md
   - Workflows:
     - Complete Development Flow: workflows/complete-development-flow.md
   - Collection Guide: al-development.md

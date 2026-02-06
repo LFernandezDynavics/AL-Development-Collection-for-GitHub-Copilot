@@ -1,7 +1,7 @@
 ---
 name: AL Development Conductor
 description: 'AL Conductor Agent - Orchestrates Planning → Implementation → Review → Commit cycle for AL Development. Enforces TDD and quality gates for Business Central extensions.'
-tools: ['execute', 'read/problems', 'read/readFile', 'agent', 'edit', 'search', 'web', 'github/search_code', 'github/search_code', 'memory', 'todo', 'ms-dynamics-smb.al/al_downloadsymbols', 'ms-dynamics-smb.al/al_symbolsearch']
+tools: ['execute', 'read/problems', 'read/readFile', 'agent', 'edit', 'search', 'web', 'github/search_code', 'memory', 'todo', 'ms-dynamics-smb.al/al_downloadsymbols', 'ms-dynamics-smb.al/al_symbolsearch']
 model: Claude Sonnet 4.5
 argument-hint: 'Feature description or requirements for TDD orchestration (e.g., "Add customer loyalty points system")'
 handoffs:

@@ -2,7 +2,7 @@
 name: AL Implementation Specialist
 description: 'AL Developer - Tactical implementation specialist for Business Central extensions. Focuses on code execution with full access to build/edit/test tools. Implements features following specifications without architectural decisions.'
 argument-hint: 'Implementation task, bug fix, or feature to code (e.g., "Add email validation field to Customer table")'
-tools: ['vscode', 'execute', 'read', 'agent', 'edit', 'search', 'web', 'github/*', 'microsoft-docs/*', 'upstash/context7/*', 'github/*', 'memory', 'todo']
+tools: ['vscode', 'execute', 'read', 'agent', 'edit', 'search', 'web', 'github/*', 'microsoft-docs/*', 'upstash/context7/*', 'memory', 'todo']
 model: Claude Sonnet 4.5
 handoffs:
   - label: Request Architecture Design

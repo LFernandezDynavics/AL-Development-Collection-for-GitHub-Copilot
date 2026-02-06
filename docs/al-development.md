@@ -1,6 +1,6 @@
 # AL Development for Business Central
 
-**AI Native AL Development** toolkit for Microsoft Dynamics 365 Business Central implementing the **[AI Native-Instructions Architecture](https://danielmeppiel.github.io/awesome-ai-native/)** framework. Transform ad-hoc AI usage into systematic engineering through **37 Agent Primitives** across **3 framework layers**.
+**AI Native AL Development** toolkit for Microsoft Dynamics 365 Business Central implementing the **[AI Native-Instructions Architecture](https://danielmeppiel.github.io/awesome-ai-native/)** framework. Transform ad-hoc AI usage into systematic engineering through **38 Agent Primitives** across **3 framework layers**.
 
 ## Framework Architecture
 
@@ -10,10 +10,10 @@ This collection implements the **AI Native-Instructions Architecture** with thre
 **Foundation** - Structured instructions using semantic markdown (headers, lists, links) that guide AI reasoning for predictable, repeatable results.
 
 ### Layer 2: Agent Primitives  
-**Implementation** - 37 configurable tools that deploy your prompt engineering systematically:
+**Implementation** - 38 configurable tools that deploy your prompt engineering systematically:
 - **📋 Instructions** (9) - Auto-applied coding rules via `applyTo` patterns
 - **🎯 Agentic Workflows** (18) - Complete task execution processes
-- **💬 Agents** (6) - Role-based specialists with tool boundaries
+- **💬 Agents** (7) - Role-based specialists with tool boundaries
 - **🎭 Orchestra System** (4) - Multi-agent TDD orchestration
 
 **🎭 Orchestra System** (4 agents) - Multi-agent TDD orchestration for MEDIUM/HIGH complexity:
@@ -74,7 +74,7 @@ Invoke with `@workspace use [prompt-name]`:
 
 > 💡 **Agentic Workflows**: Prompts orchestrate all primitives (instructions, modes, tools) into end-to-end processes with human validation checkpoints.
 
-### 💬 Agents (6 primitives - Layer 2)
+### 💬 Agents (7 primitives - Layer 2)
 
 **Role-based specialists** with MCP tool boundaries preventing cross-domain security breaches:
 
@@ -84,6 +84,7 @@ Invoke with `@workspace use [prompt-name]`:
 - **al-tester** ✅ - Testing strategy, TDD methodology, quality assurance
 - **al-api** 🌐 - RESTful API design and implementation
 - **al-copilot** 🤖 - AI-powered Copilot feature development
+- **al-presales** 💼 - Project planning, effort estimation, and presales support
 
 > 💡 **Tool Boundaries**: Like professional licensing, each mode has explicit CAN/CANNOT lists preventing dangerous cross-domain operations.
 
@@ -433,15 +434,15 @@ Found an issue or have a suggestion? This collection improves through use:
 ## Framework Compliance
 
 **Framework**: [AI Native-Instructions Architecture](https://danielmeppiel.github.io/awesome-ai-native/)  
-**Version**: 2.8.0  
-**Last Updated**: 2025-11-25  
+**Version**: 2.11.0  
+**Last Updated**: 2026-02-06  
 **Author**: javiarmesto  
-**Total Primitives**: 37 (9 instructions + 18 workflows + 6 agents + 4 orchestra)  
+**Total Primitives**: 38 (9 instructions + 18 workflows + 7 agents + 4 orchestra)  
 **Status**: ✅ Fully compliant with AI Native-Instructions Architecture
 
 ### Framework Implementation
 - ✅ **Layer 1: Markdown Prompt Engineering** - Structured semantic markdown
-- ✅ **Layer 2: Agent Primitives** - 37 configurable tools (9 instructions + 18 workflows + 6 agents + 4 orchestra)
+- ✅ **Layer 2: Agent Primitives** - 38 configurable tools (9 instructions + 18 workflows + 7 agents + 4 orchestra)
 - ✅ **Layer 3: Context Engineering** - Modular `applyTo` patterns + centralized context system
 - ✅ **AGENTS.md Ready** - Prepared for universal context compilation
 - ✅ **Orchestra System** - Multi-agent TDD orchestration with context awareness

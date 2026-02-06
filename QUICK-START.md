@@ -55,6 +55,6 @@
 
 ---
 
-**Version / Versión**: 2.7.0  
+**Version / Versión**: 2.11.0  
 **Framework**: [AI Native-Instructions Architecture](https://danielmeppiel.github.io/awesome-ai-native/)  
-**Last Updated / Última Actualización**: 2025-11-14
+**Last Updated / Última Actualización**: 2026-02-06

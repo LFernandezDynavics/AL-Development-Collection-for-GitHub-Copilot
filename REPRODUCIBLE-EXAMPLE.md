@@ -10,7 +10,7 @@ This document guides you step-by-step to reproduce the complete loyalty points s
 
 - ✅ VS Code with AL Language extension
 - ✅ GitHub Copilot active
-- ✅ AL Development Collection installed (v2.8.0+)
+- ✅ AL Development Collection installed (v2.11.0+)
 - ✅ AL project initialized or BC sandbox available
 - ⏱️ Estimated time: 2 hours
 
@@ -504,8 +504,8 @@ Now that you master the complete flow:
 
 ---
 
-**Last updated**: 2025-11-14  
-**Version**: 2.8.0  
+**Last updated**: 2026-02-06  
+**Version**: 2.11.0  
 **Validation**: ✅ 24/24 checks passed  
 **Average time**: 2 hours  
 **Difficulty**: 🟡 MEDIUM

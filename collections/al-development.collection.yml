@@ -1,11 +1,13 @@
 id: al-development
-name: AL Development for Business Central
-description: AI Native Development toolkit implementing the A-Instructions Architecture framework with 38 Agent Primitives across 3 systematic layers. Provides Markdown Prompt Engineering through Instructions (9), Agentic Workflows (18), Agents (7), Orchestra System (4) and Context Engineering via applyTo patterns for optimal LLM performance in Business Central development. Includes multi-agent TDD orchestration and complete workflow documentation.
-tags: [al, business-central, dynamics365, erp, microsoft, ai-native, a-instructions, agent-primitives, context-engineering, copilot, tdd, orchestration]
+name: AL Development Collection for GitHub Copilot
+description: |
+  ALDC Core v1.1 — Skills-based modularization with preserved orchestration for Business Central AL development.
+  4 public agents + 3 internal subagents + 11 composable skills + 6 workflows + 9 auto-applied instructions.
+  Spec-first, architecture-driven, TDD-orchestrated development with human-in-the-loop gates.
+tags: [al, business-central, dynamics365, erp, microsoft, aldc, tdd, skills, orchestration, copilot]
 
 items:
-    # Layer 2: Agent Primitives - Instructions (7 files)
-    # Context Engineering via applyTo patterns for modular context loading
+  # ─── Instructions (9 files — auto-applied coding standards) ───────────────
   - path: instructions/al-guidelines.instructions.md
     kind: instruction
   - path: instructions/al-code-style.instructions.md
@@ -20,507 +22,157 @@ items:
     kind: instruction
   - path: instructions/al-testing.instructions.md
     kind: instruction
+  - path: instructions/copilot-instructions.md
+    kind: instruction
+    description: |
+      Master integration document for GitHub Copilot. Routes to 4 public agents based on task:
+      - Designing/architecture? → @al-architect
+      - Implementing/coding/debugging? → @al-developer
+      - TDD orchestrated feature (MEDIUM/HIGH)? → @al-conductor
+      - Project estimation? → @al-presales
+      Auto-loaded as .github/copilot-instructions.md per GitHub Copilot conventions.
+  - path: instructions/index.md
+    kind: instruction
 
-  # Layer 2: Agent Primitives - Agentic Workflows (18 files)
-  # Complete systematic processes with validation gates and AL tool access
-  - path: prompts/al-initialize.prompt.md
-    kind: prompt
-  - path: prompts/al-diagnose.prompt.md
+  # ─── Workflows (6 retained — invoke with @workspace use [name]) ───────────
+  - path: prompts/al-spec.create.prompt.md
     kind: prompt
   - path: prompts/al-build.prompt.md
     kind: prompt
-  - path: prompts/al-events.prompt.md
-    kind: prompt
-  - path: prompts/al-performance.prompt.md
-    kind: prompt
-  - path: prompts/al-performance.triage.prompt.md
-    kind: prompt
-  - path: prompts/al-permissions.prompt.md
-    kind: prompt
-  - path: prompts/al-migrate.prompt.md
-    kind: prompt
-  - path: prompts/al-pages.prompt.md
-    kind: prompt
-  - path: prompts/al-spec.create.prompt.md
-    kind: prompt
   - path: prompts/al-pr-prepare.prompt.md
-    kind: prompt
-  - path: prompts/al-copilot-capability.prompt.md
-    kind: prompt
-  - path: prompts/al-copilot-promptdialog.prompt.md
-    kind: prompt
-  - path: prompts/al-copilot-test.prompt.md
-    kind: prompt
-  - path: prompts/al-copilot-generate.prompt.md
-    kind: prompt
-  - path: prompts/al-translate.prompt.md
     kind: prompt
   - path: prompts/al-context.create.prompt.md
     kind: prompt
   - path: prompts/al-memory.create.prompt.md
     kind: prompt
+  - path: prompts/al-initialize.prompt.md
+    kind: prompt
 
-  # Layer 3: Integration Guide & Documentation (2 files)
-  # Master coordination documents linking all Agent Primitives
-  - path: instructions/copilot-instructions.md
+  # ─── Skills (11 composable — loaded on demand by agents) ──────────────────
+  # Required skills (7)
+  - path: skills/skill-api.md
     kind: instruction
-    description: |
-      Master integration document for GitHub Copilot. This is the collection's main coordination hub,
-      linking all 38 Agent Primitives and providing usage patterns for the complete AL Development Collection.
-      
-      Auto-loaded as .github/copilot-instructions.md per GitHub Copilot conventions.
-      Contains architecture overview, agent coordination, workflow examples, and critical AL patterns.
-  
-  - path: docs/workflows/complete-development-flow.md
+    description: API design, OData/REST, versioning, EntityName conventions, bound actions
+  - path: skills/skill-copilot.md
     kind: instruction
-    description: |
-      Complete visual guide for development workflows from requirements to deployment.
-      Includes decision tree, flow patterns (Simple/Moderate/Complex), specialized flows (API/Copilot/Performance),
-      end-to-end examples, and agent interaction matrix.
-      
-      Use as reference to understand when to use workflows vs Orchestra, how agents interact,
-      and complete workflow patterns for different feature complexities.
+    description: Copilot capability lifecycle, PromptDialog, AI Test Toolkit, responsible AI
+  - path: skills/skill-debug.md
+    kind: instruction
+    description: Root cause analysis workflow, profiling, diagnostic patterns
+  - path: skills/skill-performance.md
+    kind: instruction
+    description: SetLoadFields, CalcFields grouping, early filtering, temporary tables, triage
+  - path: skills/skill-events.md
+    kind: instruction
+    description: Event subscriber/publisher patterns, IsHandled, integration events
+  - path: skills/skill-permissions.md
+    kind: instruction
+    description: PermissionSet generation, READ/CALC permission sets, security models
+  - path: skills/skill-testing.md
+    kind: instruction
+    description: Given/When/Then, Library Assert, IsInitialized, TDD cycle, AL-Go structure
+  # Recommended skills (4)
+  - path: skills/skill-migrate.md
+    kind: instruction
+    description: BC version migration, breaking changes, upgrade codeunits
+  - path: skills/skill-pages.md
+    kind: instruction
+    description: Page types, UX patterns, controls, Page Designer integration
+  - path: skills/skill-translate.md
+    kind: instruction
+    description: XLIFF, multi-language, localization, translation management
+  - path: skills/skill-estimation.md
+    kind: instruction
+    description: Project estimation, PERT, SWOT analysis, effort scoping
 
-  # Layer 2: Agent Primitives - Agents (7 strategic + 4 orchestra = 11 total)
-  # Role-based specialists with MCP tool boundaries preventing cross-domain operations
-  # NOTE: al-orchestrator was archived in v2.8.0 - use al-architect as entry point
-  
+  # ─── Public Agents (4 — user-invokable) ───────────────────────────────────
   - path: agents/al-architect.agent.md
     kind: agent
     usage: recommended
     description: |
-      Solution architecture and design specialist - YOUR ENTRY POINT FOR NEW FEATURES.
-      Applies Markdown Prompt Engineering for structured technical decision-making. 
-      Uses semantic markdown (headers, lists, links) to create clear architectural 
-      documentation and design rationale.
+      Solution Architect — YOUR ENTRY POINT FOR MEDIUM/HIGH complexity requirements.
+      Designs solutions, information flows, Mermaid diagrams, technical decisions.
+      Produces: {req_name}.architecture.md in .github/plans/{req_name}/
 
-      Tool Boundaries (professional licensing model):
-      - CAN: Design solutions, analyze patterns, recommend approaches
-      - CANNOT: Execute builds, deploy code, run tests (delegates to workflows)
+      Loads skills on demand: skill-api, skill-copilot, skill-performance, skill-events
 
-      Auto-loads Instructions for context:
-      - al-guidelines.instructions.md (BC architectural patterns)
-      - al-code-style.instructions.md (feature-based structure)
-      - al-performance.instructions.md (scalability considerations)
+      Flow: @al-architect → al-spec.create → @al-conductor
 
-      Ideal for (strategic thinking, not execution):
-      - Planning new feature architecture
-      - Designing data models and table structures
-      - Evaluating integration strategies
-      - Making strategic technical decisions
-      - Reviewing and refactoring existing designs
-
-      Example usage:
-      ```markdown
-      ---
-      mode: al-architect
-      title: Design multi-company approval workflow
-      ---
-      
-      #file: src/Sales/SalesHeader.Table.al
-      #file: src/Approval/ApprovalEntry.Table.al
-      
-      Design an approval workflow system that:
-      - Works across multiple companies
-      - Supports delegation
-      - Sends email notifications
-      - Integrates with existing sales documents
-      ```
-
-      To get the best results:
-      - Include relevant existing code in context
-      - Specify business requirements clearly
-      - Mention scalability and data volume expectations
-      - Ask about alternatives and trade-offs
-
-  - path: agents/al-debugger.agent.md
-    kind: agent
-    usage: optional
-    description: |
-      Systematic debugging specialist applying Markdown Prompt Engineering for structured problem diagnosis. Uses semantic markdown to create clear diagnostic trees and root cause analysis documentation.
-
-      Tool Boundaries (professional licensing model):
-      - CAN: Analyze issues, diagnose root causes, recommend fixes
-      - CANNOT: Execute code, run debuggers directly (recommends workflows)
-
-      Recommends Agentic Workflows:
-      - al-debug.prompt.md (for attaching debugger)
-      - al-performance.prompt.md (for profiling bottlenecks)
-      - al-troubleshoot.prompt.md (for common patterns)
-
-      Ideal for (diagnosis, not execution):
-      - Diagnosing bugs and unexpected behavior
-      - Root cause analysis of complex issues
-      - Investigating intermittent problems
-      - Understanding code execution flow
-      - Performance bottleneck identification
-
-      Example usage:
-      ```markdown
-      ---
-      mode: al-debugger
-      title: Debug event subscriber not firing
-      ---
-      
-      #file: src/Sales/SalesEventHandler.Codeunit.al
-      
-      My OnBeforePostSalesDoc event subscriber isn't being called.
-      The signature looks correct but it never executes.
-      ```
-
-      To get the best results:
-      - Include error messages and symptoms
-      - Share relevant code in context
-      - Describe steps to reproduce
-      - Mention what you've already tried
-
-  - path: agents/al-tester.agent.md
-    kind: agent
-    usage: optional
-    description: |
-      Testing strategy and TDD specialist applying Markdown Prompt Engineering for structured test planning. Uses semantic markdown to create clear test scenarios and coverage matrices.
-
-      Tool Boundaries (professional licensing model):
-      - CAN: Design test strategies, plan scenarios, review coverage
-      - CANNOT: Execute tests, run code (delegates to workflows)
-
-      Auto-loads Instructions for context:
-      - al-testing.instructions.md (AL-Go structure, test patterns)
-      
-      Implements Context Engineering:
-      - Only generates tests when explicitly requested
-      - Preserves context for test design over implementation
-
-      Ideal for (strategy, not execution):
-      - Designing test strategies
-      - Implementing test-driven development (TDD)
-      - Creating comprehensive test suites
-      - Improving test coverage
-      - Setting up test automation
-
-      Example usage:
-      ```markdown
-      ---
-      mode: al-tester
-      title: Create test suite for sales posting logic
-      ---
-      
-      #file: src/Sales/SalesPost.Codeunit.al
-      
-      I need comprehensive tests for the sales posting logic.
-      What test scenarios should I cover?
-      ```
-
-      To get the best results:
-      - Share the code you want to test
-      - Specify if you want unit, integration, or UI tests
-      - Mention any specific edge cases to cover
-      - Indicate your test coverage goals
-
-  - path: agents/al-api.agent.md
-    kind: agent
-    usage: optional
-    description: |
-      RESTful API design specialist applying Markdown Prompt Engineering for structured API contracts. Uses semantic markdown to create clear endpoint documentation and integration patterns.
-
-      Tool Boundaries (professional licensing model):
-      - CAN: Design APIs, plan endpoints, document contracts
-      - CANNOT: Execute builds, test APIs directly (recommends workflows)
-
-      Auto-loads Instructions for context:
-      - al-error-handling.instructions.md (proper error responses)
-      - al-performance.instructions.md (API optimization patterns)
-
-      Recommends Agentic Workflows:
-      - al-permissions.prompt.md (for API security setup)
-      - al-build.prompt.md (for deployment)
-
-      Ideal for (design and implementation guidance):
-      - Designing API endpoints and contracts
-      - Implementing API pages (v2.0)
-      - Setting up authentication and security
-      - API versioning strategies
-      - External system integrations
-
-      Example usage:
-      ```markdown
-      ---
-      mode: al-api
-      title: Create API for mobile app integration
-      ---
-      
-      I need to expose sales orders to a mobile app.
-      The app needs to:
-      - List orders by customer
-      - Get order details with lines
-      - Create new orders
-      - Update order status
-      ```
-
-      To get the best results:
-      - Describe the API consumer (mobile app, external system, etc.)
-      - Specify required operations (CRUD, custom actions)
-      - Mention authentication requirements
-      - Include performance expectations
-
-  - path: agents/al-copilot.agent.md
-    kind: agent
-    usage: optional
-    description: |
-      AI-powered feature specialist applying advanced Markdown Prompt Engineering for Copilot experiences. Expert in prompt engineering patterns, context loading strategies, and responsible AI implementation.
-
-      Tool Boundaries (professional licensing model):
-      - CAN: Design AI features, engineer prompts, plan integrations
-      - CANNOT: Execute code, deploy services (recommends workflows)
-
-      Coordinates with other Agent Primitives:
-      - al-architect.agent.md (for AI integration architecture)
-      - al-error-handling.instructions.md (for AI service failures)
-
-      Implements meta-level Context Engineering:
-      - Designs prompt engineering patterns for end-user Copilot features
-      - Plans context optimization strategies for AI features
-
-      Ideal for (AI feature design and prompt engineering):
-      - Designing Copilot user experiences
-      - Implementing Azure OpenAI integration
-      - Prompt engineering for business scenarios
-      - Creating AI-powered suggestions and insights
-      - Implementing responsible AI practices
-
-      Example usage:
-      ```markdown
-      ---
-      mode: al-copilot
-      title: Add AI sales forecasting to customer card
-      ---
-      
-      I want to add an AI-powered sales forecast feature that:
-      - Analyzes historical sales data
-      - Provides monthly forecasts
-      - Suggests optimal order quantities
-      - Explains its reasoning
-      ```
-
-      To get the best results:
-      - Describe the AI feature from user perspective
-      - Specify what data the AI should analyze
-      - Mention desired output format
-      - Include any responsible AI considerations
-      - Ask about prompt engineering best practices
-
-  - path: agents/al-presales.agent.md
-    kind: agent
-    usage: optional
-    description: |
-      Project planning and presales specialist for Business Central development.
-      Provides effort estimation, project scoping, and technical presales support.
-
-      Tool Boundaries (professional licensing model):
-      - CAN: Estimate effort, plan projects, scope requirements, assess risks
-      - CANNOT: Execute code, build extensions, run tests (delegates to workflows)
-
-      Ideal for:
-      - Project effort estimation and planning
-      - Technical presales support
-      - Requirement scoping and analysis
-      - Risk assessment and mitigation planning
-      - Resource planning and timeline estimation
+      Tool Boundaries:
+      - CAN: Design solutions, create architecture docs, decompose requirements
+      - CANNOT: Execute builds, deploy code (delegates to @al-developer or @al-conductor)
 
   - path: agents/al-developer.agent.md
     kind: agent
     usage: recommended
     description: |
-      Tactical implementation specialist with full MCP tool access for executing code changes. Focuses on clean execution within established patterns without making strategic architectural decisions.
+      Implementation Specialist — Direct implementation for LOW complexity or quick adjustments.
+      Implements features, fixes bugs, debugs, refactors. Full AL MCP tool access.
 
-      Tool Boundaries (professional licensing model):
+      Loads skills on demand: skill-debug, skill-api, skill-copilot, skill-events,
+      skill-permissions, skill-pages, skill-migrate, skill-translate
+
+      For LOW complexity: al-spec.create → @al-developer
+      For debugging/quick fixes: @al-developer directly
+
+      Tool Boundaries:
       - CAN: Create/edit files, build, publish, test, refactor, fix bugs
-      - CANNOT: Design architectures, test strategies, API contracts (delegates to specialized modes)
+      - CANNOT: Design architectures, orchestrate multi-phase TDD (delegates to @al-conductor)
 
-      Full AL MCP Tool Access:
-      - Build tools: al_build, al_buildall, al_package, al_publish, al_incrementalpublish
-      - Environment: al_downloadsymbols, al_downloadsource
-      - Code generation: al_generatepermissionset, al_generatemanifest
-      - Debugging: al_debugWithoutpublish, snapshot debugging tools
-      - Performance: al_generatecpuprofile
-
-      Auto-loads Instructions for quality:
-      - al-code-style.instructions.md (2-space indent, feature folders)
-      - al-naming-conventions.instructions.md (26-char limits)
-      - al-performance.instructions.md (SetLoadFields patterns)
-      - al-error-handling.instructions.md (TryFunctions)
-      - al-events.instructions.md (event patterns)
-
-      Implements systematic workflow:
-      1. Load context (search, usages, problems)
-      2. Implement following auto-instructions
-      3. Build and validate continuously
-      4. Test integration
-      5. Delegate strategic decisions to specialized modes
-
-      Ideal for (tactical execution):
-      - Implementing features from specifications
-      - Creating AL objects (tables, pages, codeunits)
-      - Extending base BC objects (table/page extensions)
-      - Implementing event subscribers
-      - Refactoring existing code
-      - Fixing bugs and errors
-      - Building and publishing extensions
-
-      Example usage:
-      ```markdown
-      ---
-      mode: al-developer
-      title: Implement customer email validation
-      ---
-      
-      #file: src/Sales/Customer.TableExt.al
-      
-      Implement email validation on the Customer table extension:
-      - Add event subscriber for OnBeforeValidateEvent on Email field
-      - Validate email format using regex
-      - Show error if invalid
-      - Build and test
-      ```
-
-      To get the best results:
-      - Provide clear specifications or reference existing patterns
-      - Include relevant files in context
-      - Specify if you need builds/tests run
-      - Mention any specific business rules
-      - Let the mode delegate if architectural decisions arise
-
-  # Layer 2: Agent Primitives - Orchestra System (4 files)
-  # Multi-agent TDD workflow coordination following GitHub Copilot Orchestra pattern
-  # Adapted for AL development with Business Central best practices
   - path: agents/al-conductor.agent.md
     kind: agent
     usage: recommended
     description: |
-      Main orchestration agent managing Planning → Implementation → Review → Commit cycle for AL development.
-      Delegates to specialized subagents (planning, implementation, review) for structured TDD workflow.
-      Enforces Test-Driven Development and quality gates for Business Central extensions.
-      
-      Use for complex multi-phase features requiring structured workflow with quality enforcement.
-      Creates plan files in .github/plans/ with complete documentation trail.
-      
-      Key Features:
-      - Multi-phase planning with AL-specific context (base objects, events, AL-Go structure)
-      - TDD enforcement: Red (failing tests) → Green (minimal code) → Refactor
-      - Quality gates: Automated code review before each commit
-      - Documentation: Auto-generates plan, phase completion, and final summary files
-      - AL best practices: Event-driven, naming conventions, performance patterns
-      
-      Example usage:
-      ```markdown
-      Use al-conductor mode
-      
-      I need to add email validation to the Customer table using event subscribers.
-      The validation should:
-      - Use regex pattern matching
-      - Allow empty emails (Email is optional in BC)
-      - Normalize to lowercase
-      - Show user-friendly error message
-      ```
-      
-      Workflow:
-      1. User describes feature → Conductor delegates to planning subagent
-      2. Planning returns AL context → Conductor creates multi-phase plan
-      3. User approves plan → Conductor orchestrates implementation phases
-      4. Each phase: Implement → Review → Commit (with user approval)
-      5. Plan completion → Documentation summary generated
-      
-      To get the best results:
-      - Provide clear business requirements and constraints
-      - Review and approve the plan before implementation starts
-      - Answer open questions during planning phase
-      - Commit after each phase (don't skip commit gates)
-      - Trust the TDD process (tests first, then minimal code)
-      
+      TDD Orchestrator — Coordinates multi-phase implementation for MEDIUM/HIGH complexity.
+      Delegates to 3 internal subagents: planning → implement → review.
+      Enforces RED→GREEN→REFACTOR TDD cycle with HITL gates per phase.
+
+      Requires: {req_name}.spec.md in .github/plans/{req_name}/ (from al-spec.create)
+      Produces: {req_name}-plan.md and {req_name}-phase-N-complete.md
+
+      Subagents invoked automatically (not user-invokable):
+      - al-planning-subagent: context research
+      - al-implement-subagent: TDD implementation (tests FIRST)
+      - al-review-subagent: code review against spec + architecture
+
+  - path: agents/al-presales.agent.md
+    kind: agent
+    usage: optional
+    description: |
+      Pre-Sales & Estimation Specialist — effort estimation, project scoping, risk assessment.
+      Lives outside the development cycle. Loads skill-estimation.
+
+      Produces: effort estimates, project plans, risk assessments
+
+  # ─── Internal Subagents (3 — conductor-only, not user-invokable) ──────────
   - path: agents/al-planning-subagent.agent.md
     kind: agent
     usage: optional
     description: |
-      AL-aware research and context gathering subagent for Business Central development.
-      Analyzes codebase structure, dependencies, AL objects, event architecture, and AL-Go structure.
-      Returns structured findings to Conductor for plan creation.
-      
-      Called automatically by al-conductor. Not for direct use by developers.
-      
-      Responsibilities:
-      - Identify relevant AL objects (Tables, Pages, Codeunits, etc.)
-      - Map event architecture (subscribers, publishers, integration points)
-      - Verify AL-Go structure (app/ vs test/ separation)
-      - Analyze dependencies (.alpackages/, app.json, symbols)
-      - Document performance considerations (large tables, SetLoadFields)
-      - Suggest 2-3 implementation options with pros/cons
-      
-      Returns structured findings with:
-      - Base BC objects and existing extensions
-      - Event subscribers/publishers available
-      - AL-Go project structure
-      - Naming and organizational patterns
-      - Performance context
-      - Implementation recommendations
-      
+      AL-aware research and context gathering. Called by al-conductor.
+      Analyzes codebase, dependencies, AL objects, event architecture, AL-Go structure.
+      Returns structured findings to conductor for plan creation.
+      NOT for direct use — invoked automatically by @al-conductor.
+
   - path: agents/al-implement-subagent.agent.md
     kind: agent
     usage: optional
     description: |
-      TDD-focused implementation subagent with full AL MCP tool access for Business Central.
-      Executes implementation tasks following strict Test-Driven Development with AL patterns.
-      Works autonomously within phase boundaries set by Conductor.
-      
-      Called automatically by al-conductor. Not for direct use by developers.
-      
-      TDD Workflow:
-      1. RED: Write failing tests in /test project → Verify failure
-      2. GREEN: Write minimal AL code in /app project → Verify tests pass
-      3. REFACTOR: Apply AL patterns, optimize, document
-      4. VALIDATE: Run full test suite, check for regressions
-      
-      AL Patterns Enforced:
-      - Event-driven architecture (TableExtension, PageExtension, Event Subscribers)
-      - AL-Go structure (app/ and test/ separation)
-      - Naming conventions (26-char limit, PascalCase)
-      - Performance patterns (SetLoadFields, early filtering, temporary tables)
-      - Error handling (TryFunctions, error labels, telemetry)
-      
-      Full AL MCP Tool Access:
-      - al_build, al_publish, al_incremental_publish (compilation & deployment)
-      - al_debug_without_publish (quick debugging)
-      - runCommands, runTasks (test execution, linting)
-      
-      Uses Claude Haiku 4.5 for cost-efficient execution.
-      
+      TDD-only implementation subagent. Called by al-conductor per phase.
+      Step 0: Verify test infrastructure (Library Assert, Any, ID ranges).
+      RED: Write failing tests. GREEN: Minimal code. REFACTOR: AL patterns.
+      Loads domain skills (skill-api, skill-permissions, etc.) as needed.
+      NOT for direct use — invoked automatically by @al-conductor.
+
   - path: agents/al-review-subagent.agent.md
     kind: agent
     usage: optional
     description: |
-      AL code review subagent validating implementation quality for Business Central.
-      Checks test coverage, AL patterns, performance, and BC best practices.
-      Returns structured review: APPROVED / NEEDS_REVISION / FAILED.
-      
-      Called automatically by al-conductor. Not for direct use by developers.
-      
-      AL-Specific Review Checklist:
-      - Event-Driven Architecture: No base object modifications (CRITICAL)
-      - Naming Conventions: 26-character limit respected (MAJOR if violated)
-      - AL-Go Structure: App and test code properly separated (MAJOR if mixed)
-      - Performance Patterns: SetLoadFields, early filtering applied (MAJOR for large tables)
-      - Error Handling: TryFunctions for external calls, error labels used
-      - Test Coverage: Happy path, error cases, edge cases covered (MAJOR if missing)
-      - Feature Organization: Code organized by capability, not object type
-      
-      Review Output:
-      - Status: APPROVED / NEEDS_REVISION / FAILED
-      - Issues: CRITICAL / MAJOR / MINOR with file/line references
-      - AL Best Practices Compliance: Checklist results
-      - Test Results: Pass/fail status for all tests
-      - Recommendations: Specific improvements (even when approved)
-      - Next Steps: What Conductor should do next
-      
-      Uses Claude Sonnet 4.5 for thorough analysis.
+      Code review subagent. Called by al-conductor after each implementation phase.
+      Validates against spec + architecture + AL best practices.
+      Returns: APPROVED / NEEDS_REVISION / FAILED with CRITICAL/MAJOR/MINOR issues.
+      Checks skills compliance (api patterns, performance patterns, test patterns).
+      NOT for direct use — invoked automatically by @al-conductor.
 
 display:
   ordering: manual

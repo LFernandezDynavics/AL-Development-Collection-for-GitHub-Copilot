@@ -7,18 +7,17 @@
 
 **All files in**: `.github/plans/`
 
-```
+```text
 .github/plans/
-├── project-context.md          # Project overview (al-context.create workflow)
-├── session-memory.md           # Session continuity (al-memory.create workflow)
-├── <feature>-arch.md           # Architecture design (al-architect)
-├── <feature>-spec.md           # Technical spec (al-spec.create workflow)
-├── <feature>-plan.md           # Execution plan (al-conductor)
-├── <feature>-phase-N-complete.md  # Phase completion (al-conductor)
-├── <feature>-complete.md       # Final report (al-conductor)
-├── <issue>-diagnosis.md        # Debug analysis (al-debugger)
-├── <feature>-test-plan.md      # Test strategy (al-tester)
-└── <endpoint>-api-design.md    # API contract (al-api)
+├── memory.md                              # Global context (all agents read/update)
+└── {req_name}/                            # Per-requirement subdirectory
+    ├── {req_name}.architecture.md         # Architecture design (@al-architect)
+    ├── {req_name}.spec.md                 # Technical spec (al-spec.create)
+    ├── {req_name}.test-plan.md            # Test strategy (al-spec.create or conductor)
+    ├── {req_name}-plan.md                 # Execution plan (@al-conductor Phase 1)
+    ├── {req_name}-phase-1-complete.md     # Phase completion (@al-conductor)
+    ├── {req_name}-phase-N-complete.md
+    └── {req_name}-plan-complete.md        # Final report (@al-conductor)
 ```
 
 **Why single directory?**
@@ -28,9 +27,6 @@
 - ✅ Less directory management overhead
 
 ## Agent Responsibilities
-
-### 🎯 al-orchestrator
-**Files**: None (router only)
 
 ### 🏗️ al-architect
 **Creates**: `.github/plans/<feature>-arch.md`

@@ -82,7 +82,7 @@ tools:
 |:-----|:--------|:--------|
 | **Instruction** | `*.instructions.md` | `al-guidelines.instructions.md` |
 | **Prompt** | `*.prompt.md` | `al-workspace.prompt.md` |
-| **Agent** | `*.agent.md` | `al-orchestrator.agent.md` |
+| **Agent** | `*.agent.md` | `al-architect.agent.md` |
 
 ## Directory Structure
 
@@ -96,9 +96,15 @@ AL-Development-Collection-for-GitHub-Copilot/
 │   ├── al-workspace.prompt.md
 │   ├── al-build.prompt.md
 │   └── ...
-├── agents/             # Role-based specialists
-│   ├── al-orchestrator.agent.md
+├── agents/             # 4 public agents + 3 internal subagents
 │   ├── al-architect.agent.md
+│   ├── al-developer.agent.md
+│   ├── al-conductor.agent.md
+│   ├── al-presales.agent.md
+│   ├── al-planning-subagent.agent.md
+│   ├── al-implement-subagent.agent.md
+│   └── al-review-subagent.agent.md
+├── skills/             # 11 composable skills
 │   └── ...
 └── collections/           # Collection manifest
     └── al-development.collection.yml
@@ -129,8 +135,10 @@ Prompts are invoked explicitly:
 
 Agents are activated via mode selection:
 
-```bash
-Switch to al-orchestrator mode
+```text
+@al-architect
+
+I need to [describe your requirement]
 ```
 
 ## Priority System

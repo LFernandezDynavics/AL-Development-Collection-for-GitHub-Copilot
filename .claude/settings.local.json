@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(unzip -o aldc-core-v1.1-package.zip)",
+      "Bash(node tools/aldc-validate/index.js --config aldc.yaml)",
+      "Bash(vsce package)",
+      "Bash(wc -l /c/Users/JavierArmestoGonzále/Documents/AL/ALDC/ALDC-AL-Development-Collection-for-GitHub-Copilot/skills/*.md /c/Users/JavierArmestoGonzále/Documents/AL/ALDC/ALDC-AL-Development-Collection-for-GitHub-Copilot/prompts/*.md)"
+    ]
+  }
+}

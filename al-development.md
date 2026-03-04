@@ -151,7 +151,7 @@ Invoke with `@workspace use [prompt-name]`:
 
 ### 📖 Integration Guide (1 primitive - Layer 2)
 
-- **copilot-instructions.md** - Master document coordinating all 38 primitives with comprehensive usage guidance and workflow examples
+- **copilot-instructions.md** - Master document routing to 4 public agents with usage guidance and workflow examples
 
 ## Quick Start
 

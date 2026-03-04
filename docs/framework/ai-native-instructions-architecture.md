@@ -36,13 +36,14 @@ AL-Development-Collection-for-GitHub-Copilot
 │   ├── al-migrate.prompt.md
 │   ├── al-pages.prompt.md
 │   └── al-workflow.prompt.md
-└── agents/                           # Role-based specialists
-    ├── al-orchestrator.agent.md
+└── agents/                           # 4 public agents + 3 internal subagents
     ├── al-architect.agent.md
-    ├── al-debugger.agent.md
-    ├── al-tester.agent.md
-    ├── al-api.agent.md
-    └── al-copilot.agent.md
+    ├── al-developer.agent.md
+    ├── al-conductor.agent.md
+    ├── al-presales.agent.md
+    ├── al-planning-subagent.agent.md
+    ├── al-implement-subagent.agent.md
+    └── al-review-subagent.agent.md
 ```
 
 ## Key Improvements

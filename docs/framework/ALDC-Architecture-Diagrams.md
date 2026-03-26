@@ -82,9 +82,9 @@ flowchart TD
     REQ[Requirement] --> CLASSIFY{Complexity?}
 
     CLASSIFY -->|LOW| SPEC_LOW[al-spec.create]
-    SPEC_LOW --> DEV[@AL Implementation Specialist\nDirect Implementation]
+    SPEC_LOW --> DEV["@AL Implementation Specialist\nDirect Implementation"]
 
-    CLASSIFY -->|MEDIUM/HIGH| ARCH[@AL Architecture & Design Specialist\nSolution Architect]
+    CLASSIFY -->|MEDIUM/HIGH| ARCH["@AL Architecture & Design Specialist\nSolution Architect"]
     ARCH -->|Produces architecture.md| ARCH_DOC[(architecture.md)]
     ARCH --> DECOMPOSE{Decompose\ninto sub-requirements?}
 
@@ -92,9 +92,9 @@ flowchart TD
     DECOMPOSE -->|Yes| SPEC_B[al-spec.create\n→ spec-B.md]
     DECOMPOSE -->|No| SPEC_SINGLE[al-spec.create\n→ spec.md]
 
-    SPEC_A --> COND_A[@AL Development Conductor\nTDD Orchestration A]
-    SPEC_B --> COND_B[@AL Development Conductor\nTDD Orchestration B]
-    SPEC_SINGLE --> COND[@AL Development Conductor\nTDD Orchestration]
+    SPEC_A --> COND_A["@AL Development Conductor\nTDD Orchestration A"]
+    SPEC_B --> COND_B["@AL Development Conductor\nTDD Orchestration B"]
+    SPEC_SINGLE --> COND["@AL Development Conductor\nTDD Orchestration"]
 
     COND_A --> DONE_A[Delivery A]
     COND_B --> DONE_B[Delivery B]
@@ -114,7 +114,7 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    START([User: @AL Development Conductor\nwith spec.md]) --> PHASE1
+    START(["User: @AL Development Conductor\nwith spec.md"]) --> PHASE1
 
     subgraph PHASE1["Phase 1: Planning"]
         P1A[AL Planning Subagent\nContext Research]

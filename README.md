@@ -72,17 +72,17 @@ The architect designs the solution and can decompose complex requirements into m
 flowchart TD
     REQ[Requirement] --> CLASSIFY{Complexity?}
     CLASSIFY -->|LOW| SPEC_LOW[al-spec.create]
-    SPEC_LOW --> DEV[@AL Implementation Specialist]
+    SPEC_LOW --> DEV["@AL Implementation Specialist"]
 
-    CLASSIFY -->|MEDIUM/HIGH| ARCH[@AL Architecture & Design Specialist]
+    CLASSIFY -->|MEDIUM/HIGH| ARCH["@AL Architecture & Design Specialist"]
     ARCH -->|Designs solution| ARCH_DOC[architecture.md]
     ARCH --> DECOMPOSE{Decompose?}
     DECOMPOSE -->|Yes| SPEC_A[al-spec.create → spec-A]
     DECOMPOSE -->|Yes| SPEC_B[al-spec.create → spec-B]
     DECOMPOSE -->|No| SPEC_SINGLE[al-spec.create → spec.md]
-    SPEC_A --> COND_A[@AL Development Conductor]
-    SPEC_B --> COND_B[@AL Development Conductor]
-    SPEC_SINGLE --> COND[@AL Development Conductor]
+    SPEC_A --> COND_A["@AL Development Conductor"]
+    SPEC_B --> COND_B["@AL Development Conductor"]
+    SPEC_SINGLE --> COND["@AL Development Conductor"]
 ```
 
 ---
@@ -119,10 +119,10 @@ flowchart LR
 ```mermaid
 graph TB
     subgraph PUBLIC["Public Agents (user-invocable)"]
-        ARCH[@AL Architecture & Design Specialist]
-        DEV[@AL Implementation Specialist]
-        COND[@AL Development Conductor]
-        PRE[@AL Pre-Sales & Project Estimation Specialist]
+        ARCH["@AL Architecture & Design Specialist"]
+        DEV["@AL Implementation Specialist"]
+        COND["@AL Development Conductor"]
+        PRE["@AL Pre-Sales & Project Estimation Specialist"]
     end
 
     subgraph INTERNAL["Internal Subagents (conductor-only)"]

@@ -1,3 +1,8 @@
+---
+name: skill-migrate
+description: "AL version migration for Business Central. Use when upgrading extensions between BC versions, handling breaking changes, or implementing rollback strategies."
+---
+
 # Skill: AL Project Migration
 
 ## Purpose

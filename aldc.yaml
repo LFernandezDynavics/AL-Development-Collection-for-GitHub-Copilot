@@ -44,18 +44,18 @@ required:
 
   skills:
     required:
-      - "skills/skill-api.md"
-      - "skills/skill-copilot.md"
-      - "skills/skill-debug.md"
-      - "skills/skill-performance.md"
-      - "skills/skill-events.md"
-      - "skills/skill-permissions.md"
-      - "skills/skill-testing.md"
+      - "skills/skill-api/SKILL.md"
+      - "skills/skill-copilot/SKILL.md"
+      - "skills/skill-debug/SKILL.md"
+      - "skills/skill-performance/SKILL.md"
+      - "skills/skill-events/SKILL.md"
+      - "skills/skill-permissions/SKILL.md"
+      - "skills/skill-testing/SKILL.md"
     recommended:
-      - "skills/skill-migrate.md"
-      - "skills/skill-pages.md"
-      - "skills/skill-translate.md"
-      - "skills/skill-estimation.md"
+      - "skills/skill-migrate/SKILL.md"
+      - "skills/skill-pages/SKILL.md"
+      - "skills/skill-translate/SKILL.md"
+      - "skills/skill-estimation/SKILL.md"
 
   instructions:
     - "instructions/al-guidelines.instructions.md"
@@ -77,23 +77,23 @@ required:
     - "docs/templates/delivery-template.md"
     - "docs/templates/skill-template.md"
 
-packs:
-  bc-agents:
-    agent: "al-agent-builder"
-    skills:
-      - "skill-agent-instructions"
-      - "skill-agent-task-patterns"
-      - "skill-agent-toolkit"
-    workflows:
-      - "al-agent.create"
-      - "al-agent.task"
-      - "al-agent.instructions"
-      - "al-agent.test"
-    instructions:
-      - "al-agent-toolkit"
-    tools:
-      - "tools/bc-agents/scaffold_agent.py"
-      - "tools/bc-agents/validate_agent_config.sh"
+optional:
+  agents:
+    - "agents/al-agent-builder.agent.md"
+  skills:
+    - "skills/skill-agent-instructions/SKILL.md"
+    - "skills/skill-agent-task-patterns/SKILL.md"
+    - "skills/skill-agent-toolkit/SKILL.md"
+  workflows:
+    - "prompts/al-agent.create.prompt.md"
+    - "prompts/al-agent.task.prompt.md"
+    - "prompts/al-agent.instructions.prompt.md"
+    - "prompts/al-agent.test.prompt.md"
+  instructions:
+    - "instructions/al-agent-toolkit.instructions.md"
+  tools:
+    - "tools/bc-agents/scaffold_agent.py"
+    - "tools/bc-agents/validate_agent_config.sh"
 
 validation:
   rules:

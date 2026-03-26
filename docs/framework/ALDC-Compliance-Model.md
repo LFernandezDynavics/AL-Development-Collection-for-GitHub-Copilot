@@ -7,8 +7,8 @@
 Cumple el backbone mínimo:
 - Contratos por requerimiento en `.github/plans/` (3-file sets)
 - Memory global (`memory.md`) acumulativo
-- Flujo MEDIUM/HIGH: @al-architect → al-spec.create → @al-conductor(subagents) → HITL → entrega
-- Flujo LOW: al-spec.create → @al-developer → entrega
+- Flujo MEDIUM/HIGH: @AL Architecture & Design Specialist → al-spec.create → @AL Development Conductor(subagents) → HITL → entrega
+- Flujo LOW: al-spec.create → @AL Implementation Specialist → entrega
 - 4 agentes públicos + 3 subagents internos + 6 workflows + 7 skills requeridos + 9 instructions
 - Templates inmutables (7)
 - `aldc-validate` en verde
@@ -29,7 +29,7 @@ Incluye Core v1.1 + operación multi-sesión/autónoma:
 
 ### ALDC Core + Extensions
 
-Incluye Core v1.1 + módulos/packs opcionales, sin alterar contratos Core.
+Incluye Core v1.1 + componentes opcionales, sin alterar contratos Core.
 
 ## Checklist Core v1.1
 
@@ -41,7 +41,7 @@ Requerido (todo debe cumplirse):
 - [ ] `memory.md` se actualiza en cada handoff significativo
 - [ ] Existen las 7 plantillas inmutables en `docs/templates/` sin alteración
 - [ ] Existen los 4 agentes Core bajo `toolkitRoot/agents/`
-- [ ] Existen los 3 subagents en `toolkitRoot/agents/` (planning, implement, review — `user-invokable: false`)
+- [ ] Existen los 3 subagents en `toolkitRoot/agents/` (planning, implement, review — `user-invocable: false`)
 - [ ] Existen los 6 workflows Core bajo `toolkitRoot/prompts/`
 - [ ] Existen los 7 skills requeridos en `toolkitRoot/skills/`
 - [ ] Existen las 9 instructions

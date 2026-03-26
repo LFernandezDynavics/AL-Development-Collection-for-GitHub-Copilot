@@ -68,7 +68,7 @@ function parseArgs(argv) {
     targetDir: null,
     yes: false,
     force: false,
-    withPacks: null, // null = ask, true = include, false = skip
+    // withPacks removed — bc-agents components are now regular optional content
   };
 
   for (let i = 0; i < args.length; i++) {
@@ -79,10 +79,6 @@ function parseArgs(argv) {
       parsed.yes = true;
     } else if (a === '--force' || a === '-f') {
       parsed.force = true;
-    } else if (a === '--with-packs') {
-      parsed.withPacks = true;
-    } else if (a === '--no-packs') {
-      parsed.withPacks = false;
     } else if (a === '--help' || a === '-h') {
       parsed.command = 'help';
     } else if (!a.startsWith('-') && !parsed.command) {
@@ -107,28 +103,26 @@ function ensureDir(dir) {
  * @param {boolean} force  Overwrite existing files
  * @returns {{ copied: number, skipped: number }}
  */
-function copyDir(src, dst, force = false) {
+function copyDir(src, dst, force = false, depth = 0) {
   if (!fs.existsSync(src)) return { copied: 0, skipped: 0 };
   ensureDir(dst);
 
   let copied = 0;
   let skipped = 0;
 
-  const EXCLUDE = new Set([
-    'node_modules', 'package.json', 'package-lock.json',
-    '.git', '.gitignore', '.npmignore',
-    'install.js', 'validate-al-collection.js',
-  ]);
+  const ALWAYS_EXCLUDE = new Set(['node_modules', 'package-lock.json', '.git', '.gitignore', '.npmignore']);
+  const ROOT_EXCLUDE = new Set(['install.js', 'validate-al-collection.js']);
 
   for (const item of fs.readdirSync(src)) {
-    if (EXCLUDE.has(item)) continue;
+    if (ALWAYS_EXCLUDE.has(item)) continue;
+    if (depth === 0 && ROOT_EXCLUDE.has(item)) continue;
 
     const srcPath = path.join(src, item);
     const dstPath = path.join(dst, item);
     const stat = fs.statSync(srcPath);
 
     if (stat.isDirectory()) {
-      const r = copyDir(srcPath, dstPath, force);
+      const r = copyDir(srcPath, dstPath, force, depth + 1);
       copied += r.copied;
       skipped += r.skipped;
     } else if (force || !fs.existsSync(dstPath)) {
@@ -162,6 +156,22 @@ function copyFile(src, dst, force = false) {
   return true;
 }
 
+/**
+ * Count files recursively in a directory (for folder-based skills).
+ */
+function countFiles(dir) {
+  let count = 0;
+  for (const item of fs.readdirSync(dir)) {
+    const full = path.join(dir, item);
+    if (fs.statSync(full).isDirectory()) {
+      count += countFiles(full);
+    } else {
+      count++;
+    }
+  }
+  return count;
+}
+
 // ─── Prompt helper ─────────────────────────────────────────────────────────
 function ask(question, defaultYes = true) {
   const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
@@ -178,81 +188,24 @@ function ask(question, defaultYes = true) {
 
 // ─── ALDC Core v1.1 component map ──────────────────────────────────────────
 const COMPONENTS = [
-  { name: 'Agents',      src: 'agents',         count: '4 public + 3 subagents' },
-  { name: 'Skills',       src: 'skills',          count: '7 required + 4 recommended' },
-  { name: 'Prompts',      src: 'prompts',         count: '6 workflows' },
-  { name: 'Instructions', src: 'instructions',    count: '9 auto-applied' },
-  { name: 'Templates',    src: 'docs/templates',  count: '7 contract templates' },
-  { name: 'Framework',    src: 'docs/framework',  count: 'spec + docs' },
+  { name: 'Agents',      src: 'agents',             count: '5 agents (4 public + 1 optional) + 3 subagents' },
+  { name: 'Skills',      src: 'skills',             count: '14 skills (7 required + 4 recommended + 3 optional)' },
+  { name: 'Prompts',     src: 'prompts',            count: '10 workflows (6 core + 4 agent-builder)' },
+  { name: 'Instructions',src: 'instructions',       count: '10 auto-applied' },
+  { name: 'Templates',   src: 'docs/templates',     count: '7 contract templates' },
+  { name: 'Framework',   src: 'docs/framework',     count: 'spec + docs' },
+  { name: 'Validator',   src: 'tools/aldc-validate', count: 'compliance checker' },
+  { name: 'BC Tools',    src: 'tools/bc-agents',    count: 'scaffolder + validator' },
 ];
-
-// ─── Extension Packs ─────────────────────────────────────────────────────
-const PACKS = [
-  {
-    id: 'bc-agents',
-    name: 'BC Agents Extension Pack',
-    description: 'Business Central Agent development with AI Development Toolkit & Agent SDK',
-    components: [
-      { name: 'Agent',       src: 'agents/al-agent-builder.agent.md' },
-      { name: 'Skills',      src: 'skills/skill-agent-instructions.md' },
-      { name: 'Skills',      src: 'skills/skill-agent-task-patterns.md' },
-      { name: 'Skills',      src: 'skills/skill-agent-toolkit.md' },
-      { name: 'References',  src: 'skills/references/agent-keywords-reference.md' },
-      { name: 'Examples',    src: 'skills/examples/agent-simple-instructions.txt' },
-      { name: 'Examples',    src: 'skills/examples/agent-advanced-instructions.txt' },
-      { name: 'Workflow',    src: 'prompts/al-agent.create.prompt.md' },
-      { name: 'Workflow',    src: 'prompts/al-agent.task.prompt.md' },
-      { name: 'Workflow',    src: 'prompts/al-agent.instructions.prompt.md' },
-      { name: 'Workflow',    src: 'prompts/al-agent.test.prompt.md' },
-      { name: 'Instruction', src: 'instructions/al-agent-toolkit.instructions.md' },
-    ],
-    tools: [
-      { name: 'Tools', src: 'tools/bc-agents' },
-    ],
-    docs: [
-      { name: 'Pack docs', src: 'docs/packs' },
-    ],
-  },
-];
-
-/**
- * Install a single extension pack.
- */
-function installPack(pack, packageDir, targetDir, projectDir, force) {
-  let copied = 0;
-  let skipped = 0;
-
-  // Copy individual component files
-  for (const comp of pack.components) {
-    const src = path.join(packageDir, comp.src);
-    const dst = path.join(targetDir, comp.src);
-    if (copyFile(src, dst, force)) copied++; else skipped++;
-  }
-
-  // Copy tool directories
-  for (const tool of pack.tools) {
-    const src = path.join(packageDir, tool.src);
-    const dst = path.join(targetDir, tool.src);
-    const r = copyDir(src, dst, force);
-    copied += r.copied;
-    skipped += r.skipped;
-  }
-
-  // Copy doc directories
-  for (const doc of pack.docs) {
-    const src = path.join(packageDir, doc.src);
-    const dst = path.join(targetDir, doc.src);
-    const r = copyDir(src, dst, force);
-    copied += r.copied;
-    skipped += r.skipped;
-  }
-
-  return { copied, skipped };
-}
 
 // ─── INSTALL command ───────────────────────────────────────────────────────
 async function install(opts) {
-  const packageDir = path.resolve(__dirname, '..');
+  // When run from scripts/install.js (repo), go up one level.
+  // When run from aldc-core-X.Y.Z/install.js (tgz), __dirname IS the package.
+  const packageDir = process.env.ALDC_PACKAGE_DIR ||
+    (path.basename(__dirname) === 'scripts'
+      ? path.resolve(__dirname, '..')
+      : path.resolve(__dirname));
   const projectDir = process.cwd();
   const targetDir = path.resolve(projectDir, opts.targetDir || '.github');
 
@@ -276,8 +229,16 @@ async function install(opts) {
     log('\nExisting ALDC installation detected.', C.yellow);
     if (opts.force) {
       log('--force: existing files will be overwritten.', C.yellow);
+    } else if (!opts.yes) {
+      const update = await ask('\nUpdate existing installation? (overwrites changed files)', true);
+      if (update) {
+        opts.force = true;
+        log('Update mode: existing files will be overwritten.', C.yellow);
+      } else {
+        log('Merge mode: existing files will be preserved.', C.dim);
+      }
     } else {
-      log('Merge mode: existing files will be preserved.', C.dim);
+      log('Merge mode: existing files will be preserved (use --force to overwrite).', C.dim);
     }
   }
 
@@ -314,13 +275,24 @@ async function install(opts) {
     log('  collections/ not found (optional)', C.dim);
   }
 
-  // 3. Copy aldc.yaml to project root
+  // 3. Copy aldc.yaml to project root and update toolkitRoot
   header('Installing Configuration');
+  const aldcYamlDst = path.join(projectDir, 'aldc.yaml');
   if (copyFile(
     path.join(packageDir, 'aldc.yaml'),
-    path.join(projectDir, 'aldc.yaml'),
+    aldcYamlDst,
     opts.force
-  )) totalCopied++; else totalSkipped++;
+  )) {
+    totalCopied++;
+    // Update toolkitRoot to match the target directory relative to project root
+    const relTarget = path.relative(projectDir, targetDir).replace(/\\/g, '/') || '.';
+    if (relTarget !== '.') {
+      let yamlContent = fs.readFileSync(aldcYamlDst, 'utf8');
+      yamlContent = yamlContent.replace(/^toolkitRoot:\s*"\."/m, `toolkitRoot: "${relTarget}"`);
+      fs.writeFileSync(aldcYamlDst, yamlContent, 'utf8');
+      ok(`toolkitRoot updated to "${relTarget}"`);
+    }
+  } else { totalSkipped++; }
 
   // 4. Copy copilot-instructions.md entrypoint to .github/
   const copilotSrc = path.join(packageDir, 'instructions', 'copilot-instructions.md');
@@ -345,40 +317,15 @@ async function install(opts) {
     totalSkipped++;
   }
 
-  // 6. Extension Packs (optional)
-  const availablePacks = PACKS.filter(p => {
-    // Check if the pack source files exist in the package
-    return p.components.some(c => fs.existsSync(path.join(packageDir, c.src)));
-  });
-
-  if (availablePacks.length > 0) {
-    header('Extension Packs');
-
-    for (const pack of availablePacks) {
-      log(`\n  ${C.bold}${pack.name}${C.reset}`);
-      log(`  ${pack.description}`, C.dim);
-      log(`  ${pack.components.length} components + ${pack.tools.length} tools`, C.dim);
-
-      let installPack_ = opts.withPacks;
-
-      // If not set via CLI flag, ask interactively (unless --yes)
-      if (installPack_ === null) {
-        if (opts.yes) {
-          installPack_ = true; // --yes defaults to including packs
-        } else {
-          installPack_ = await ask(`\n  Install ${pack.name}?`);
-        }
-      }
-
-      if (installPack_) {
-        log(`\n  Installing ${pack.name}...`, C.cyan);
-        const r = installPack(pack, packageDir, targetDir, projectDir, opts.force);
-        totalCopied += r.copied;
-        totalSkipped += r.skipped;
-        ok(`${pack.name} installed (${r.copied} files)`);
-      } else {
-        log(`  Skipped ${pack.name}`, C.dim);
-      }
+  // 6. Install validator dependencies (js-yaml)
+  const validatorDir = path.join(targetDir, 'tools', 'aldc-validate');
+  if (fs.existsSync(path.join(validatorDir, 'package.json'))) {
+    try {
+      const { execSync } = require('child_process');
+      execSync('npm install --production --silent', { cwd: validatorDir, stdio: 'ignore' });
+      ok('Validator dependencies installed');
+    } catch {
+      log('  ! Could not install validator dependencies (run npm install in tools/aldc-validate/)', C.yellow);
     }
   }
 
@@ -421,9 +368,9 @@ async function validate(opts) {
   for (const comp of COMPONENTS) {
     const dir = path.join(targetDir, comp.src);
     if (fs.existsSync(dir)) {
-      const files = fs.readdirSync(dir).filter(f => f.endsWith('.md'));
-      totalFiles += files.length;
-      ok(`${comp.src}/ (${files.length} files) — ${comp.name}`);
+      const count = countFiles(dir);
+      totalFiles += count;
+      ok(`${comp.src}/ (${count} files) — ${comp.name}`);
     } else {
       err(`${comp.src}/ — MISSING`);
       errors++;
@@ -498,8 +445,6 @@ ${C.cyan}Options:${C.reset}
   --target-dir <dir>  Installation directory (default: .github)
   --yes, -y           Skip confirmation prompts
   --force, -f         Overwrite existing files
-  --with-packs        Include all extension packs (no prompt)
-  --no-packs          Skip all extension packs (no prompt)
 
 ${C.cyan}Examples:${C.reset}
   ${C.green}# Install to default .github/ directory${C.reset}
@@ -512,14 +457,8 @@ ${C.cyan}Examples:${C.reset}
   npx aldc install --force --yes
 
   ${C.green}# Install from local .tgz${C.reset}
-  npm install ./al-development-collection-3.1.0.tgz
+  npm install ./al-development-collection-3.2.0.tgz
   npx aldc install
-
-  ${C.green}# Install with BC Agents Extension Pack${C.reset}
-  npx aldc install --with-packs
-
-  ${C.green}# Install Core only (skip packs)${C.reset}
-  npx aldc install --no-packs
 
   ${C.green}# Validate current installation${C.reset}
   npx aldc validate
@@ -527,27 +466,122 @@ ${C.cyan}Examples:${C.reset}
 ${C.cyan}What gets installed:${C.reset}
   ${C.bold}Core:${C.reset}
   <target-dir>/
-    agents/           4 public agents + 3 subagents
-    skills/           7 required + 4 recommended skills
-    prompts/          6 agentic workflows
-    instructions/     9 auto-applied guidelines
+    agents/           5 agents (4 public + 1 optional) + 3 subagents
+    skills/           14 skills (7 required + 4 recommended + 3 optional)
+    prompts/          10 workflows (6 core + 4 agent-builder)
+    instructions/     10 auto-applied guidelines
     docs/framework/   Core specification & docs
     docs/templates/   7 contract templates
     collections/      Collection manifest
+    tools/bc-agents/  Agent SDK scaffolder + validator
   <project-root>/
     aldc.yaml         ALDC Core configuration
     .github/copilot-instructions.md   Copilot entrypoint
     .github/plans/memory.md           Global memory template
-
-  ${C.bold}Extension Pack — BC Agents (optional):${C.reset}
-  <target-dir>/
-    agents/           +1 agent (al-agent-builder)
-    skills/           +3 skills (instructions, task-patterns, toolkit)
-    prompts/          +4 workflows (create, task, instructions, test)
-    instructions/     +1 instruction (al-agent-toolkit)
-    tools/bc-agents/  Scaffolder + validator scripts
-    docs/packs/       Pack manifest
 `);
+}
+
+// ─── TEST-LOCAL command ──────────────────────────────────────────────────
+async function testLocal() {
+  const os = require('os');
+  const tmpBase = path.join(os.tmpdir(), 'aldc-test-' + Date.now());
+  const tmpProject = path.join(tmpBase, 'test-project');
+  fs.mkdirSync(tmpProject, { recursive: true });
+
+  banner();
+  header('ALDC Core v1.1 — Local Test');
+  info(`Test directory: ${tmpProject}`);
+  console.log('');
+
+  // Run install into temp dir
+  const origCwd = process.cwd();
+  process.chdir(tmpProject);
+  await install({ targetDir: '.github', yes: true, force: true });
+
+  // Validate skills structure
+  header('Verifying Skills Folder Structure');
+  const skillsDir = path.join(tmpProject, '.github', 'skills');
+  let skillErrors = 0;
+  let skillCount = 0;
+
+  if (!fs.existsSync(skillsDir)) {
+    err('skills/ directory not found in target');
+    skillErrors++;
+  } else {
+    for (const entry of fs.readdirSync(skillsDir)) {
+      const entryPath = path.join(skillsDir, entry);
+      if (!fs.statSync(entryPath).isDirectory()) {
+        if (entry === 'index.md') continue;
+        log(`  ? ${entry} (loose file, expected folder)`, C.yellow);
+        continue;
+      }
+      const skillMd = path.join(entryPath, 'SKILL.md');
+      if (fs.existsSync(skillMd)) {
+        // Check frontmatter
+        const content = fs.readFileSync(skillMd, 'utf8');
+        const hasFrontmatter = content.startsWith('---');
+        if (hasFrontmatter) {
+          ok(`${entry}/SKILL.md (frontmatter OK)`);
+        } else {
+          err(`${entry}/SKILL.md (MISSING frontmatter)`);
+          skillErrors++;
+        }
+        skillCount++;
+      } else {
+        err(`${entry}/ — SKILL.md MISSING`);
+        skillErrors++;
+      }
+    }
+  }
+
+  // Verify agent-instructions has assets
+  const agentInstrDir = path.join(skillsDir, 'skill-agent-instructions');
+  if (fs.existsSync(agentInstrDir)) {
+    const refs = path.join(agentInstrDir, 'references', 'agent-keywords-reference.md');
+    const ex1 = path.join(agentInstrDir, 'examples', 'agent-simple-instructions.txt');
+    const ex2 = path.join(agentInstrDir, 'examples', 'agent-advanced-instructions.txt');
+    if (fs.existsSync(refs)) ok('references/agent-keywords-reference.md'); else { err('references/ missing'); skillErrors++; }
+    if (fs.existsSync(ex1)) ok('examples/agent-simple-instructions.txt'); else { err('examples/ missing'); skillErrors++; }
+    if (fs.existsSync(ex2)) ok('examples/agent-advanced-instructions.txt'); else { err('examples/ missing'); skillErrors++; }
+  }
+
+  // Run ALDC validator on the installed output
+  header('Running ALDC Validator on Installed Output');
+  const aldcYamlDst = path.join(tmpProject, 'aldc.yaml');
+  if (fs.existsSync(aldcYamlDst)) {
+    const { execSync } = require('child_process');
+    try {
+      const validatorPath = path.join(tmpProject, '.github', 'tools', 'aldc-validate', 'index.js');
+      if (fs.existsSync(validatorPath)) {
+        const out = execSync(`node "${validatorPath}" --config aldc.yaml`, {
+          cwd: tmpProject,
+          encoding: 'utf8',
+          stdio: ['pipe', 'pipe', 'pipe'],
+        });
+        console.log(out);
+      } else {
+        log('  Validator not found in installed output (tools/ not copied by default)', C.dim);
+      }
+    } catch (e) {
+      err('Validator failed:');
+      console.log(e.stdout || e.message);
+    }
+  }
+
+  // Summary
+  header('Test Results');
+  log(`Skills verified: ${skillCount}`, C.green);
+  if (skillErrors === 0) {
+    log('ALL CHECKS PASSED', C.green + C.bold);
+  } else {
+    log(`${skillErrors} error(s) found`, C.red);
+  }
+  console.log('');
+  info(`Test output preserved at: ${tmpProject}`);
+  log('Delete manually when done: rm -rf "' + tmpBase + '"', C.dim);
+  console.log('');
+
+  process.chdir(origCwd);
 }
 
 // ─── Main ──────────────────────────────────────────────────────────────────
@@ -559,6 +593,9 @@ switch (opts.command) {
     break;
   case 'validate':
     validate(opts).catch((e) => { err(e.message); process.exit(1); });
+    break;
+  case 'test-local':
+    testLocal().catch((e) => { err(e.message); process.exit(1); });
     break;
   case 'install':
   default:

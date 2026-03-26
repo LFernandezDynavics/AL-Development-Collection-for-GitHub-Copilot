@@ -1,3 +1,8 @@
+---
+name: skill-events
+description: "AL event-driven architecture for Business Central. Use when creating EventSubscribers, IntegrationEvents, BusinessEvents, or implementing publisher/subscriber patterns in extensions."
+---
+
 # Skill: AL Event-Driven Architecture
 
 ## Purpose

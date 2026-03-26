@@ -1,3 +1,8 @@
+---
+name: skill-translate
+description: "AL translation and localization for Business Central. Use when working with XLF files, NAB tools, or implementing multi-language support in extensions."
+---
+
 # Skill: AL Translation Management
 
 ## Purpose

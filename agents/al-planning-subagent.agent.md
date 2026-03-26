@@ -2,8 +2,9 @@
 name: AL Planning Subagent
 description: 'AL Planning Subagent - AL-aware research and context gathering for Business Central development. Returns structured findings to Conductor for plan creation.'
 user-invocable: false
+disable-model-invocation: true
 argument-hint: 'Research goal or problem statement for AL development'
-tools: ['read/problems', 'read/readFile', 'agent', 'edit', 'search', 'web', 'microsoft-docs/*', 'memory', 'todo']
+tools: ['read/problems', 'read/readFile', 'agent', 'edit', 'search', 'web', 'microsoft-docs/*', 'vscode/memory', 'todo']
 model: Claude Sonnet 4.5
 handoffs:
   - label: Return to Conductor

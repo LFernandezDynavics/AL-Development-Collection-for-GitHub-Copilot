@@ -1,3 +1,8 @@
+---
+name: skill-pages
+description: "AL page design patterns for Business Central. Use when creating Card, List, ListPart, Document pages, implementing page extensions, or designing UX layouts."
+---
+
 # Skill: AL Page Design
 
 ## Purpose

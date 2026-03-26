@@ -1,3 +1,8 @@
+---
+name: skill-copilot
+description: "AL Copilot capability development for Business Central. Use when implementing PromptDialog pages, AI generation features, or integrating with the Copilot toolkit."
+---
+
 # Skill: AL Copilot Development (Full Lifecycle)
 
 ## Purpose

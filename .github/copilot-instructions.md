@@ -4,7 +4,7 @@
 
 ## Overview
 
-This workspace contains AL (Application Language) code for Microsoft Dynamics 365 Business Central. It uses the **ALDC Core v1.1** skills-based architecture: **4 agents + 11 skills + 6 workflows + 7 instructions**.
+This workspace contains AL (Application Language) code for Microsoft Dynamics 365 Business Central. It uses the **ALDC Core v1.1** skills-based architecture: **4 agents + 11 skills + 6 workflows + 9 instructions**.
 
 ## Core Principles
 
@@ -21,20 +21,20 @@ Choose the right agent for your task:
 
 | Intent | Agent | What it does |
 |--------|-------|-------------|
-| Designing, analyzing architecture, strategic decisions? | `@al-architect` | Solution design, data modeling, integration strategy |
-| Implementing, coding, debugging, fixing? | `@al-developer` | Tactical implementation with full AL MCP tools |
-| Building a feature with TDD orchestration (plan → implement → review → commit)? | `@al-conductor` | Orchestrates planning, implementation, and review subagents |
-| Estimating a project, sizing, proposals? | `@al-presales` | PERT estimation, SWOT analysis, cost breakdown |
+| Designing, analyzing architecture, strategic decisions? | `@AL Architecture & Design Specialist` | Solution design, data modeling, integration strategy |
+| Implementing, coding, debugging, fixing? | `@AL Implementation Specialist` | Tactical implementation with full AL MCP tools |
+| Building a feature with TDD orchestration (plan → implement → review → commit)? | `@AL Development Conductor` | Orchestrates planning, implementation, and review subagents |
+| Estimating a project, sizing, proposals? | `@AL Pre-Sales & Project Estimation Specialist` | PERT estimation, SWOT analysis, cost breakdown |
 
 ### Quick routing guide
 
 ```
-New feature (MEDIUM/HIGH)? → @al-architect → al-spec.create → @al-conductor
-New feature (LOW)?         → al-spec.create → @al-developer
-Bug fix / debugging?       → @al-developer
-Architecture review?       → @al-architect
-Full TDD cycle?            → @al-conductor
-Project estimation?        → @al-presales
+New feature (MEDIUM/HIGH)? → @AL Architecture & Design Specialist → al-spec.create → @AL Development Conductor
+New feature (LOW)?         → al-spec.create → @AL Implementation Specialist
+Bug fix / debugging?       → @AL Implementation Specialist
+Architecture review?       → @AL Architecture & Design Specialist
+Full TDD cycle?            → @AL Development Conductor
+Project estimation?        → @AL Pre-Sales & Project Estimation Specialist
 ```
 
 ## Workflows
@@ -83,8 +83,8 @@ Agents MUST declare which skills they loaded and which patterns they applied:
 
 - **al-architect** → `> **Skills applied**: skill-api, skill-events` at top of architecture.md
 - **al-developer** → `> **Skills loaded**: skill-debug (root cause analysis)` at start of response
-- **al-implement-subagent** → `### Skills Loaded` section in Phase Summary returned to Conductor
-- **al-review-subagent** → `Skills Compliance Check` checklist verifying patterns were applied
+- **AL Implementation Subagent** → `### Skills Loaded` section in Phase Summary returned to Conductor
+- **AL Code Review Subagent** → `Skills Compliance Check` checklist verifying patterns were applied
 - **al-conductor** → `Skills Applied in This Phase` table in phase-complete.md; `Skills Utilization Summary` in plan-complete.md
 
 This traceability chain ensures every skill application is auditable end-to-end.
@@ -127,28 +127,28 @@ Requirement sets live in `.github/plans/`, one subdirectory per requirement:
 
 **MEDIUM / HIGH:**
 
-1. `@al-architect` — Designs solution, creates `.github/plans/{req_name}/{req_name}.architecture.md`
+1. `@AL Architecture & Design Specialist` — Designs solution, creates `.github/plans/{req_name}/{req_name}.architecture.md`
 2. `@workspace use al-spec.create` — Reads architecture, generates `.github/plans/{req_name}/{req_name}.spec.md` (detailed blueprint: object IDs, procedure signatures, AL code)
-3. `@al-conductor` — Reads spec + architecture from `.github/plans/{req_name}/`, orchestrates TDD: planning → implementation → review
+3. `@AL Development Conductor` — Reads spec + architecture from `.github/plans/{req_name}/`, orchestrates TDD: planning → implementation → review
 4. `@workspace use al-pr-prepare` — Prepares PR referencing the plan
 
 **LOW:**
 
 1. `@workspace use al-spec.create` — Generates `.github/plans/{req_name}/{req_name}.spec.md` directly from codebase
-2. `@al-developer` — Implements directly using spec as blueprint
+2. `@AL Implementation Specialist` — Implements directly using spec as blueprint
 
 ## Complexity-Based Tool Selection
 
 When a user provides requirements, assess complexity to route correctly:
 
 **LOW** — Limited scope, single phase, no integrations
-→ `al-spec.create` → `@al-developer` direct implementation
+→ `al-spec.create` → `@AL Implementation Specialist` direct implementation
 
 **MEDIUM** — 2-3 functional areas, internal integrations, conditional logic
-→ `@al-architect` → `al-spec.create` → `@al-conductor` TDD orchestration
+→ `@AL Architecture & Design Specialist` → `al-spec.create` → `@AL Development Conductor` TDD orchestration
 
 **HIGH** — Enterprise scope, 4+ phases, external integrations, complex workflows
-→ `@al-architect` design first → `al-spec.create` → `@al-conductor` implement
+→ `@AL Architecture & Design Specialist` design first → `al-spec.create` → `@AL Development Conductor` implement
 
 Present the assessment and wait for user confirmation before proceeding.
 
@@ -219,7 +219,7 @@ end;
 
 ### 2. Use the Right Tool
 
-- **Strategic questions** → Use agents (`@al-architect`, `@al-developer`, etc.)
+- **Strategic questions** → Use agents (`@AL Architecture & Design Specialist`, `@AL Implementation Specialist`, etc.)
 - **Tactical tasks** → Use workflows (`@workspace use al-build`)
 - **Normal coding** → Let auto-applied instructions work in background
 
@@ -256,21 +256,21 @@ ALDC-Core/
 │   ├── al-developer.agent.md              # Tactical implementation
 │   ├── al-conductor.agent.md              # TDD orchestrator
 │   ├── al-presales.agent.md               # Estimation & planning
-│   ├── al-planning-subagent.agent.md      # Research (internal, user-invokable: false)
-│   ├── al-implement-subagent.agent.md     # TDD implementation (internal)
-│   └── al-review-subagent.agent.md        # Code review (internal)
+│   ├── AL Planning Subagent.agent.md      # Research (internal, user-invocable: false)
+│   ├── AL Implementation Subagent.agent.md     # TDD implementation (internal)
+│   └── AL Code Review Subagent.agent.md        # Code review (internal)
 ├── skills/                                # Composable knowledge modules (11)
-│   ├── skill-api.md
-│   ├── skill-copilot.md
-│   ├── skill-debug.md
-│   ├── skill-events.md
-│   ├── skill-estimation.md
-│   ├── skill-migrate.md
-│   ├── skill-pages.md
-│   ├── skill-performance.md
-│   ├── skill-permissions.md
-│   ├── skill-testing.md
-│   └── skill-translate.md
+│   ├── skill-api/SKILL.md
+│   ├── skill-copilot/SKILL.md
+│   ├── skill-debug/SKILL.md
+│   ├── skill-events/SKILL.md
+│   ├── skill-estimation/SKILL.md
+│   ├── skill-migrate/SKILL.md
+│   ├── skill-pages/SKILL.md
+│   ├── skill-performance/SKILL.md
+│   ├── skill-permissions/SKILL.md
+│   ├── skill-testing/SKILL.md
+│   └── skill-translate/SKILL.md
 ├── prompts/                               # Workflows (6)
 │   ├── al-spec.create.prompt.md
 │   ├── al-build.prompt.md
@@ -290,12 +290,12 @@ ALDC-Core/
 ## BC Agents Pack (Extension)
 
 For agent development with AI Development Toolkit:
-- @al-agent-builder — standalone agent builder (7-phase workflow)
+- @AL Agent Builder — standalone agent builder (7-phase workflow)
 - skill-agent-task-patterns — 8 SDK integration patterns
 - skill-agent-instructions — instruction authoring framework
 - al-agent.create / al-agent.task / al-agent.instructions / al-agent.test — workflows
 
-Integrated mode: @al-architect + al-spec.create + @al-conductor
+Integrated mode: @AL Architecture & Design Specialist + al-spec.create + @AL Development Conductor
 (architect loads skill-agent-task-patterns for design decisions)
 
 ## Reference Documentation

@@ -1,3 +1,8 @@
+---
+name: skill-debug
+description: "AL debugging and diagnostics for Business Central. Use when performing snapshot debugging, CPU profiling, analyzing telemetry, or troubleshooting runtime issues."
+---
+
 # Skill: AL Debugging & Diagnostics
 
 ## Purpose

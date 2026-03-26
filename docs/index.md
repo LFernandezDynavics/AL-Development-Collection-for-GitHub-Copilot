@@ -2,10 +2,10 @@
 
 > **ALDC** — Skills-based, spec-driven, TDD-orchestrated development framework for Microsoft Dynamics 365 Business Central with GitHub Copilot agents.
 >
-> ALDC Core v1.1 | Extension v3.0.0
+> ALDC Core v1.1 | Extension v3.2.0
 
 [![ALDC Core](https://img.shields.io/badge/ALDC%20Core-v1.1%20Compliant-purple.svg)](framework/ALDC-Core-Spec-v1.1.md)
-[![Version](https://img.shields.io/badge/version-3.0.0-blue)](../CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-3.2.0-blue)](../CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green)](../LICENSE)
 
 ---
@@ -20,8 +20,8 @@ ALDC transforms how you develop Business Central extensions with GitHub Copilot.
 
 | Component | Count | Description |
 | --------- | ----- | ----------- |
-| **Public Agents** | 4 | @al-architect, @al-developer, @al-conductor, @al-presales |
-| **Internal Subagents** | 3 | al-planning-subagent, al-implement-subagent, al-review-subagent |
+| **Public Agents** | 4 | @AL Architecture & Design Specialist, @AL Implementation Specialist, @AL Development Conductor, @AL Pre-Sales & Project Estimation Specialist |
+| **Internal Subagents** | 3 | AL Planning Subagent, AL Implementation Subagent, AL Code Review Subagent |
 | **Composable Skills** | 11 | Domain knowledge loaded on demand |
 | **Workflows** | 6 | Automated processes (spec.create, build, pr-prepare, …) |
 | **Instructions** | 9 | Auto-applied coding standards (always active) |
@@ -33,10 +33,10 @@ ALDC transforms how you develop Business Central extensions with GitHub Copilot.
 
 ```text
 LOW complexity:
-  al-spec.create → @al-developer
+  al-spec.create → @AL Implementation Specialist
 
 MEDIUM/HIGH complexity:
-  @al-architect → al-spec.create → @al-conductor
+  @AL Architecture & Design Specialist → al-spec.create → @AL Development Conductor
 ```
 
 The architect is a **Solution Architect** (DESIGNS). The spec.create workflow produces the **Technical Blueprint** (DETAILS). The conductor orchestrates **TDD Implementation** (EXECUTES).
@@ -70,19 +70,19 @@ The architect is a **Solution Architect** (DESIGNS). The spec.create workflow pr
 └── plans/
     ├── memory.md                          ← Global (cross-session context)
     └── {req_name}/
-        ├── {req_name}.architecture.md    ← From @al-architect
+        ├── {req_name}.architecture.md    ← From @AL Architecture & Design Specialist
         ├── {req_name}.spec.md            ← From al-spec.create
         ├── {req_name}.test-plan.md       ← From al-spec.create or conductor
-        ├── {req_name}-plan.md            ← From @al-conductor
+        ├── {req_name}-plan.md            ← From @AL Development Conductor
         └── {req_name}-phase-N-complete.md
 ```
 
 ---
 
-## What's New in v3.0.0
+## What's New in v3.2.0
 
 - **Skills-based modularization**: 11 composable skills replace 7 specialized agents + 12 prompts
-- **Restored TDD enforcement**: `al-implement-subagent` with hardcoded RED→GREEN→REFACTOR
+- **Restored TDD enforcement**: `AL Implementation Subagent` with hardcoded RED→GREEN→REFACTOR
 - **Contracts per requirement**: `.github/plans/{req_name}/` subdirectory structure
 - **Skills evidencing**: agents declare loaded skills and patterns applied
 - **HITL gates enforced**: mandatory stops at plan approval, each phase, completion

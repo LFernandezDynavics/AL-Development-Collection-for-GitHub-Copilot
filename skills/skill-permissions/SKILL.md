@@ -1,3 +1,8 @@
+---
+name: skill-permissions
+description: "AL permission set design for Business Central. Use when creating PermissionSets, implementing least-privilege access, or designing security models for extensions."
+---
+
 # Skill: AL Permission Management
 
 ## Purpose
